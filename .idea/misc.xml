@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BSFConsole">
+    <option name="searchOptions">
+      <BSFConsoleSearchOptions />
+    </option>
+  </component>
+  <component name="IdProvider" IDEtalkID="BD5150271A118CE2837959154CD05DED" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
+

@@ -1,0 +1,197 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"S",
+				"Set"
+			],
+			[
+				"Sesame",
+				"SesameTripleSet"
+			],
+			[
+				"Ses",
+				"SesameTripleSet"
+			],
+			[
+				"R",
+				"Repository"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SetSpec.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/SetSubset.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/HashSetSpecSetup.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/HashSetSpec.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/build.sbt",
+		"/C/Users/Tony/SkyDrive/Documents/Licences/sublime-text.lic.txt",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SetSubset.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SetSpecSetup.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSetConfiguration.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/HelloSpec.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/DefaultSesameTripleSet.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/InMemoryTemporarySetConfiguration.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/README.md",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleStoreSet.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/immutable/sesame/SesameTripleStoreSet.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/TripleStoreSet.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/immutable/TripleStoreSet.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/project/build.properties",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/project/activator-sbt-idea-shim.sbt",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/.gitignore"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\",
+			"C:\\Users\\Tony\\SkyDrive\\Projects\\scala-rdf"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"9cd20140-a92f-4ac0-b7ee-9df2f06c35e8",
+			"hello-scala",
+			"hello",
+			"hello-scala"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "scala-rdf.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 186.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

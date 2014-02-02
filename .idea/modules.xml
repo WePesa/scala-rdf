@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/scala-rdf.iml" filepath="$PROJECT_DIR$/scala-rdf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/scala-rdf-build.iml" filepath="$PROJECT_DIR$/project/scala-rdf-build.iml" />
+    </modules>
+  </component>
+</project>
+
