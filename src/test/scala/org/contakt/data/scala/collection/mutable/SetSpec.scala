@@ -19,6 +19,10 @@ abstract class SetSpec[T, TSet <: MiniSet[T, TSet]] extends FlatSpec with Before
     afterSetup
   }
 
+  "An empty set" should "have a working iterator" in {
+    val emptySet = empty
+  }
+
   "An empty set" should "be empty" in {
     val emptySet = empty
     assert(!emptySet.iterator.hasNext, s"empty set [${emptySet.getClass.getName}] was not empty as expected")

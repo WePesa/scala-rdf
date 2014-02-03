@@ -15,11 +15,11 @@ import org.contakt.data.scala.collection.mutable.MiniSet
  */
 abstract class SesameTripleSet(val rep: Repository) extends MiniSet[Statement, SesameTripleSet] {
 
-	implicit private val defaultConnection: RepositoryConnection = rep.getConnection
+	private val defaultConnection: RepositoryConnection = rep.getConnection
 
 	// **** Methods from Set[Statement] ****
 
-	def iterator(implicit connection: RepositoryConnection): Iterator[Statement] = {
+	def iterator(connection: RepositoryConnection): Iterator[Statement] = {
 		val results = connection.getStatements(null, null, null, true)
     new RepositoryResultIterator(results)
   }

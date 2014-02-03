@@ -16,12 +16,24 @@ package object sesame {
 
   }
 
+  object QueryResultIterator {
+
+  	def apply[T](results: QueryResult[T]) = new QueryResultIterator[T](results)
+  	
+  }
+
   class RepositoryResultIterator[T](results: RepositoryResult[T]) extends Iterator[T] {
 
     def hasNext: Boolean = results.hasNext
 
     def next(): T = results.next
 
+  }
+
+  object RepositoryResultIterator {
+
+  	def apply[T](results: RepositoryResult[T]) = new RepositoryResultIterator[T](results)
+  	
   }
 
 }
