@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"R",
+				"RepositoryResultIterator"
+			],
+			[
+				"Rep",
+				"RepositoryResultIterator"
+			],
+			[
 				"S",
 				"Set"
 			],
@@ -14,15 +22,38 @@
 			[
 				"Ses",
 				"SesameTripleSet"
-			],
-			[
-				"R",
-				"Repository"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"contents": "package org.contakt.data.scala.collection.mutable\n\n/**\n * Temporary trait that implements a subset of the methods from 'scala.mutable.collection.Set'.\n * Will not be required once all 'Set' methods are implemented.\n * 'T' is the element type of the Set implementation,\n * and 'TSet' is the class implementing 'Set[T]' that should be used.\n */\ntrait MiniSet[T, TSet] {\n\n  /** Adds a single element to the set. */\n  def +=(elem: T): TSet \n\n  /** Removes a single element from this mutable set. */\n  def -=(elem: T): TSet \n\n  /** Tests if some element is contained in this set. */\n  def contains(elem: T): Boolean\n\n  def iterator: Iterator[T]\n\n  def empty: TSet\n\n  /** The size of this mutable set. */\n  def size: Int\n\n}\n",
+			"file": "src/main/scala/org/contakt/data/scala/collection/mutable/MiniSet.scala",
+			"file_size": 659,
+			"file_write_time": 130359742255959009,
+			"settings":
+			{
+				"buffer_size": 718,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
+			"settings":
+			{
+				"buffer_size": 1673,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/test/scala/org/contakt/data/scala/collection/mutable/SetSpec.scala",
+			"settings":
+			{
+				"buffer_size": 858,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -51,6 +82,11 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Tony/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/DefaultSesameTripleSet.scala",
+		"/C/Users/Tony/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpecSpecSetup.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/package.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SetSpec.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/SetSubset.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/HashSetSpecSetup.scala",
@@ -62,7 +98,6 @@
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SetSpecSetup.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSetConfiguration.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/HelloSpec.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/DefaultSesameTripleSet.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/InMemoryTemporarySetConfiguration.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/README.md",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleStoreSet.scala",
@@ -112,8 +147,97 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/main/scala/org/contakt/data/scala/collection/mutable/MiniSet.scala",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 718,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								491,
+								491
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 36.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1673,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1018,
+								1018
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 275.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/test/scala/org/contakt/data/scala/collection/mutable/SetSpec.scala",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 858,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								526,
+								526
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 225.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

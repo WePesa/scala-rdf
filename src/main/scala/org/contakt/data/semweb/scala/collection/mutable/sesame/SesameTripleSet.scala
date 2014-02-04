@@ -1,9 +1,7 @@
 package org.contakt.data.semweb.scala.collection.mutable.sesame
 
-import scala.collection.mutable.{Set, SetLike}
-import org.openrdf.model.Statement
-import org.openrdf.query.QueryResult
-import org.openrdf.repository.{Repository, RepositoryConnection, RepositoryResult}
+import org.openrdf.model.{Resource, Statement}
+import org.openrdf.repository.{Repository, RepositoryConnection}
 import org.contakt.data.scala.collection.mutable.MiniSet
 
 /**
@@ -19,6 +17,18 @@ abstract class SesameTripleSet(val rep: Repository) extends MiniSet[Statement, S
 
 	// **** Methods from Set[Statement] ****
 
+  /** Adds a single statement to the triple set. */
+  def +=(stmt: Statement): SesameTripleSet = {
+  	defaultConnection.add(stmt)
+  	this
+  }
+
+  /** Removes a single statement from this triple set. */
+  def -=(stmt: Statement): SesameTripleSet = {
+  	defaultConnection.remove(stmt)
+  	this
+  }
+
 	def iterator(connection: RepositoryConnection): Iterator[Statement] = {
 		val results = connection.getStatements(null, null, null, true)
     new RepositoryResultIterator(results)
@@ -26,6 +36,14 @@ abstract class SesameTripleSet(val rep: Repository) extends MiniSet[Statement, S
 
   def iterator: Iterator[Statement] = iterator(defaultConnection)
 
+  /** Tests if some statement is contained in this triple set. */
+  def contains(stmt: Statement): Boolean = defaultConnection.hasStatement(stmt, false, contexts:_*)
+
+  /** The size of this triple set. */
+  def size: Int = defaultConnection.size(contexts:_*).toInt
+
 	// **** Other methods ****
+
+  private def contexts: Seq[Resource] = RepositoryResultIterator(defaultConnection.getContextIDs).toSeq
 
 }

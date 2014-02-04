@@ -8,8 +8,20 @@ package org.contakt.data.scala.collection.mutable
  */
 trait MiniSet[T, TSet] {
 
+  /** Adds a single element to the set. */
+  def +=(elem: T): TSet
+
+  /** Removes a single element from this mutable set. */
+  def -=(elem: T): TSet
+
+  /** Tests if some element is contained in this set. */
+  def contains(elem: T): Boolean
+
   def iterator: Iterator[T]
 
   def empty: TSet
+
+  /** The size of this mutable set. */
+  def size: Int
 
 }

@@ -36,27 +36,28 @@ object DefaultSesameTripleSet {
   /**
    * Returns an <strong>in-memory</strong> Sesame triple set
    * (containing any triples that Sesame puts there by default)
-   * with RDFS inferencing enabled.
+   * with RDFS inferencing.
    *
    * @return a Sesame triple set with default triples and RDFS inferencing.
    */
   def default: SesameTripleSet = {
     val sailStack = new ForwardChainingRDFSInferencer(new MemoryStore())
     val repository = new SailRepository(sailStack)
-    repository.initialize
+    repository.initialize()
 
     new DefaultSesameTripleSet(repository)
   }
 
   /**
-   * Returns an empty <strong>in-memory</strong> Sesame triple set with no inferencing.
+   * Returns an empty <strong>in-memory</strong> Sesame triple set
+   * without inferencing.
    *
    * @return a Sesame triple set with no triples and no inferencing.
    */
   def empty: SesameTripleSet = {
     val sailStack = new MemoryStore()
     val repository = new SailRepository(sailStack)
-    repository.initialize
+    repository.initialize()
 
     new DefaultSesameTripleSet(repository)
   }

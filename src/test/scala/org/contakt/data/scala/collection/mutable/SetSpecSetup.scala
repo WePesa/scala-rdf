@@ -13,12 +13,12 @@ trait SetSpecSetup[T, TSet <: MiniSet[T, TSet]] {
   /**
    * Any 'before' items for tests.
    */
-  def beforeSetup: Unit = {}
+  def beforeSetup() = {}
 
   /**
    * Any 'after' items for tests.
    */
-  def afterSetup: Unit = {}
+  def afterSetup() = {}
 
 	/**
 	 * Returns an empty set.
@@ -26,5 +26,11 @@ trait SetSpecSetup[T, TSet <: MiniSet[T, TSet]] {
 	 * @return an empty set.
 	 */
 	def empty: TSet
+
+  /** Returns a new element of type T. */
+  def newElem1: T
+
+  /** Returns a different new element of type T. */
+  def newElem2: T
 
 }
