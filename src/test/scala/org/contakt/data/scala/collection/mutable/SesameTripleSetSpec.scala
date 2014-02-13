@@ -4,6 +4,6 @@ import org.openrdf.model.Statement
 import org.contakt.data.semweb.scala.collection.mutable.sesame.SesameTripleSet
 
 /**
- * Test class to apply generic Set tests to the SesameTripleSet class.
+ * Test class to apply generic 'UnorderedSequentialSet' tests to the SesameTripleSet class.
  */
-class SesameTripleSetSpec extends SetSpec[Statement, SesameTripleSet] with SesameTripleSetSpecSpecSetup {}
+class SesameTripleSetSpec extends UnorderedSequentialSetSpec[Statement, SesameTripleSet] with SesameTripleSetSpecSetup {}

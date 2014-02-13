@@ -1,14 +1,14 @@
 package org.contakt.data.scala.collection.mutable
 
-import scala.collection.mutable.Set
+import scala.collection.Traversable
 
 /**
- * Trait for implementation specific setup of Scala 'Set' types,
+ * Trait for implementation specific setup of 'UnorderedSequentialSet' types,
  * which allows the same tests to work for different implementations.
- * 'T' is the element type of the Set implementation,
- * and 'TSet' is the class implementing 'Set[T]' that should be used.
+ * 'T' is the element type of the Traversable implementation,
+ * and 'TSet' is the class implementing 'UnorderedSequentialSetSpec[T]' that should be used.
  */
-trait SetSpecSetup[T, TSet <: MiniSet[T, TSet]] {
+trait UnorderedSequentialSetSpecSetup[T, TSet <: UnorderedSequentialSet[T]] {
 
   /**
    * Any 'before' items for tests.
@@ -25,12 +25,12 @@ trait SetSpecSetup[T, TSet <: MiniSet[T, TSet]] {
 	 *
 	 * @return an empty set.
 	 */
-	def empty: TSet
+	// def empty: TSet
 
   /** Returns a new element of type T. */
-  def newElem1: T
+  // def newElem1: T
 
   /** Returns a different new element of type T. */
-  def newElem2: T
+  // def newElem2: T
 
 }
