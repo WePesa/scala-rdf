@@ -46,7 +46,7 @@ class UnorderedSequentialHashSet[A] extends HashSet[A] with UnorderedSequentialS
 			UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(result._2)
 		)
 	}
-
+	
 }
 
 object UnorderedSequentialHashSet {

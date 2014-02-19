@@ -1,5 +1,6 @@
 package org.contakt.data.semweb.scala.collection.mutable.sesame
 
+import scala.collection.JavaConversions._
 import org.openrdf.model.{Resource, Statement}
 import org.openrdf.repository.{Repository, RepositoryConnection}
 import org.openrdf.repository.sail.SailRepository
@@ -18,18 +19,49 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 
 	private val defaultConnection: RepositoryConnection = rep.getConnection
 
-  /** As seen from class SesameTripleSet, the missing signatures are as follows.
-    * For convenience, these are usable as stub implementations. */
+  // **** UnorderedSequentialSet methods
+
+  /** Adds a single statement to the triple set. */
+  def +=(stmt: Statement): SesameTripleSet = {
+  	defaultConnection.add(stmt)
+  	this
+  }
+
+  /** Removes a single statement from this triple set. */
+  def -=(stmt: Statement): SesameTripleSet = {
+  	defaultConnection.remove(stmt)
+  	this
+  }
+ 
+  /** Tests if some statement is contained in this triple set. */
+  def contains(stmt: Statement): Boolean = defaultConnection.hasStatement(stmt, false, contexts:_*)
+
+  def iterator: Iterator[Statement] = iterator(defaultConnection)
+
   def :\[B](z: B)(op: (org.openrdf.model.Statement, B) => B): B = ???
   def /:[B](z: B)(op: (B, org.openrdf.model.Statement) => B): B = ???
   def -(elem: org.openrdf.model.Statement): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
   def -(elem1: org.openrdf.model.Statement,elem2: org.openrdf.model.Statement,elems: org.openrdf.model.Statement*): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
-  def -=(elem1: org.openrdf.model.Statement,elem2: org.openrdf.model.Statement,elems: org.openrdf.model.Statement*): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
-  def -=(elem: org.openrdf.model.Statement): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
+
+	/** Removes two or more elements from this mutable set. */
+  def -=(stmt1: Statement, stmt2: Statement, stmts: Statement*): SesameTripleSet = {
+  	defaultConnection.remove(stmt1)
+  	defaultConnection.remove(stmt2)
+  	defaultConnection.remove(stmts)
+  	this
+  }
+
 	def +(elem: org.openrdf.model.Statement): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
 	def +(elem1: org.openrdf.model.Statement,elem2: org.openrdf.model.Statement,elems: org.openrdf.model.Statement*): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
-	def +=(elem1: org.openrdf.model.Statement,elem2: org.openrdf.model.Statement,elems: org.openrdf.model.Statement*): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
-	def +=(elem: org.openrdf.model.Statement): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
+	
+	/** adds two or more elements to this mutable set. */
+	def +=(stmt1: Statement, stmt2: Statement, stmts: Statement*): SesameTripleSet = {
+  	defaultConnection.add(stmt1)
+  	defaultConnection.add(stmt2)
+  	defaultConnection.add(stmts)
+  	this
+	}
+
 	def add(elem: org.openrdf.model.Statement): Boolean = ???
 	def addString(b: StringBuilder,start: String,sep: String,end: String): StringBuilder = ???
 	def addString(b: StringBuilder,sep: String): StringBuilder = ???
@@ -40,10 +72,17 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 	def clear(): Unit = ???
 	def collect[B](pf: PartialFunction[org.openrdf.model.Statement,B]): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[B] = ???
 	def collectFirst[B](pf: PartialFunction[org.openrdf.model.Statement,B]): Option[B] = ???
-	def contains(elem: org.openrdf.model.Statement): Boolean = ???
 	def copyToBuffer[B >: org.openrdf.model.Statement](dest: scala.collection.mutable.Buffer[B]): Unit = ???
 	def count(p: org.openrdf.model.Statement => Boolean): Int = ???
-	def empty: org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
+
+  /**
+   * Returns an empty <strong>in-memory</strong> Sesame triple set (i.e. with no added triples beyond any that
+   * Sesame puts there by default).
+   *
+   * @return a Sesame triple set with no triples.
+   */
+  def empty = SesameTripleSet.empty
+
 	def exists(p: org.openrdf.model.Statement => Boolean): Boolean = ???
 	def filter(p: org.openrdf.model.Statement => Boolean): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
 	def filterNot(p: org.openrdf.model.Statement => Boolean): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
@@ -55,9 +94,11 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 	def foreach[B](f: org.openrdf.model.Statement => B): Unit = ???
 	def grouped(size: Int): Iterator[org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement]] = ???
 	def hasDefiniteSize: Boolean = ???
-	def isEmpty: Boolean = ???
+
+  /** Tests if this triple set is empty. */
+	def isEmpty = longSize == 0
+
 	def isTraversableAgain: Boolean = ???
-	def iterator: Iterator[org.openrdf.model.Statement] = ???
 	def map[B](f: org.openrdf.model.Statement => B): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[B] = ???
 	def mkString(start: String,sep: String,end: String): String = ???
 	def mkString(sep: String): String = ???
@@ -72,7 +113,10 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 	def reduceRightOption[B >: org.openrdf.model.Statement](op: (org.openrdf.model.Statement, B) => B): Option[B] = ???
 	def remove(elem: org.openrdf.model.Statement): Boolean = ???
 	def retain(p: org.openrdf.model.Statement => Boolean): Unit = ???
-	def size: Int = ???
+
+  /** The size of this triple set. */
+  def size = longSize.toInt
+
 	def span(p: org.openrdf.model.Statement => Boolean): (org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement], org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement]) = ???
 	def stringPrefix: String = ???
 	def toBuffer[A1 >: org.openrdf.model.Statement]: scala.collection.mutable.Buffer[A1] = ???
@@ -86,64 +130,22 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 	def toTraversable: Traversable[org.openrdf.model.Statement] = ???
 	def toVector: Vector[org.openrdf.model.Statement] = ???
 	def update(elem: org.openrdf.model.Statement,included: Boolean): Unit = ???
-  /** End of the auto-generated stubs. */
 
- //  /** The size of this triple set. */
- //  override def size: Int = defaultConnection.size(contexts:_*).toInt
+	// **** Other methods ****
 
-	// // **** Methods from Set[Statement]
+  private def contexts: Seq[Resource] = RepositoryResultIterator(defaultConnection.getContextIDs).toSeq
 
- //  /** Adds a single statement to the triple set. */
- //  def +=(stmt: Statement): SesameTripleSet = {
- //  	defaultConnection.add(stmt)
- //  	this
- //  }
+  def iterator(connection: RepositoryConnection): Iterator[Statement] = {
+    val results = connection.getStatements(null, null, null, true)
+    new RepositoryResultIterator(results)
+  }
 
- //  /** Removes a single statement from this triple set. */
- //  def -=(stmt: Statement): SesameTripleSet = {
- //  	defaultConnection.remove(stmt)
- //  	this
- //  }
-
- //  /** Tests if some statement is contained in this triple set. */
- //  def contains(stmt: Statement): Boolean = defaultConnection.hasStatement(stmt, false, contexts:_*)
-
- //  def iterator: Iterator[Statement] = iterator(defaultConnection)
-
- //  /**
- //   * Returns an empty <strong>in-memory</strong> Sesame triple set (i.e. with no added triples beyond any that
- //   * Sesame puts there by default).
- //   *
- //   * @return a Sesame triple set with no triples.
- //   */
- //  def empty: SesameTripleSet = SesameTripleSet.empty
-
-	// // **** Other methods ****
-
-	// def iterator(connection: RepositoryConnection): Iterator[Statement] = {
-	// 	val results = connection.getStatements(null, null, null, true)
- //    new RepositoryResultIterator(results)
- //  }
-
- //  private def contexts: Seq[Resource] = RepositoryResultIterator(defaultConnection.getContextIDs).toSeq
+  /** The size of this triple set. */
+  override def longSize: Long = defaultConnection.size(contexts:_*)
 
 }
 
 object SesameTripleSet {
-
-  /**
-   * Returns an empty <strong>in-memory</strong> Sesame triple set
-   * without inferencing.
-   *
-   * @return a Sesame triple set with no triples and no inferencing.
-   */
-  def empty: SesameTripleSet = {
-    val sailStack = new MemoryStore()
-    val repository = new SailRepository(sailStack)
-    repository.initialize()
-
-    new SesameTripleSet(repository)
-  }
 
   /**
    * Returns an <strong>in-memory</strong> Sesame triple set
@@ -154,6 +156,20 @@ object SesameTripleSet {
    */
   def default: SesameTripleSet = {
     val sailStack = new ForwardChainingRDFSInferencer(new MemoryStore())
+    val repository = new SailRepository(sailStack)
+    repository.initialize()
+
+    new SesameTripleSet(repository)
+  }
+
+  /**
+   * Returns an empty <strong>in-memory</strong> Sesame triple set
+   * without inferencing.
+   *
+   * @return a Sesame triple set with no triples and no inferencing.
+   */
+  def empty: SesameTripleSet = {
+    val sailStack = new MemoryStore()
     val repository = new SailRepository(sailStack)
     repository.initialize()
 

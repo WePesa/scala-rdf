@@ -52,18 +52,26 @@
 	"buffers":
 	[
 		{
-			"file": "src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala",
+			"file": "src/test/scala/org/contakt/data/scala/collection/mutable/StatementUnorderedSequentialHashSetSpecSetup.scala",
 			"settings":
 			{
-				"buffer_size": 19307,
+				"buffer_size": 371,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
+			"file": "src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpecSetup.scala",
 			"settings":
 			{
-				"buffer_size": 9430,
+				"buffer_size": 700,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/test/scala/org/contakt/data/scala/collection/mutable/StatementTestData.scala",
+			"settings":
+			{
+				"buffer_size": 783,
 				"line_ending": "Windows"
 			}
 		}
@@ -95,17 +103,20 @@
 	},
 	"file_history":
 	[
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala",
-		"/C/Users/Tony/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/StringUnorderedSequentialHashSetSpecSetup.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpec.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/StatementUnorderedSequentialHashSetSpec.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/StatementUnorderedSequentialHashSetSpecSetup.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpecSetup.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/StringUnorderedSequentialHashSetSpec.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSetSpecSetup.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpecSetup.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSetSpecSetup.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/StringUnorderedSequentialHashSetSpecSetup.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/scalardf.sc",
+		"/C/Users/Tony/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpec.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/StringUnorderedSequentialHashSetSpec.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/TraversableSpec.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/TraversableSpecSetup.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/HashSetSpecSetup.scala",
@@ -185,52 +196,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala",
+					"file": "src/test/scala/org/contakt/data/scala/collection/mutable/StatementUnorderedSequentialHashSetSpecSetup.scala",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 19307,
+						"buffer_size": 371,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								16094,
-								16094
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 6829.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9430,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7203,
-								7203
+								86,
+								86
 							]
 						],
 						"settings":
@@ -240,7 +223,66 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 196.0,
+						"translation.y": 6.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpecSetup.scala",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 700,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								51,
+								51
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 88.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/test/scala/org/contakt/data/scala/collection/mutable/StatementTestData.scala",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 783,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								78,
+								78
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

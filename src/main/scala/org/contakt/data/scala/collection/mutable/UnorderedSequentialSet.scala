@@ -17,6 +17,8 @@ import scala.collection.mutable.Buffer
 
  trait UnorderedSequentialSet[A] {
 
+ 	// **** Set[A] methods
+
 	/** Adds a single element to the set. */
 	def +=(elem: A): UnorderedSequentialSet[A] 
   
@@ -470,4 +472,9 @@ import scala.collection.mutable.Buffer
   
 	// def withFilter(p: (A) => Boolean): Iterator[A] 
 
- }
+	// **** Other methods
+
+ 	/** The size of this mutable set. */
+	def longSize: Long = size.toLong
+
+}

@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99a87e67-f4d2-4818-bf00-6c6a07402033" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\main\scala\org\contakt\data\scala\collection\mutable\HashSetMiniSet.scala" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\main\scala\org\contakt\data\scala\collection\mutable\MiniSet.scala" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\main\scala\org\contakt\data\semweb\scala\collection\mutable\sesame\DefaultSesameTripleSet.scala" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\test\scala\org\contakt\data\scala\collection\mutable\HashSetSpecSetup.scala" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\test\scala\org\contakt\data\scala\collection\mutable\SesameTripleSetSpecSpecSetup.scala" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\test\scala\org\contakt\data\scala\collection\mutable\SetSpec.scala" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\test\scala\org\contakt\data\scala\collection\mutable\SetSpecSetup.scala" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\test\scala\org\contakt\data\scala\collection\mutable\StringHashSetSpec.scala" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\test\scala\org\contakt\data\scala\collection\mutable\StringHashSetSpecSetup.scala" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\test\scala\org\contakt\data\scala\collection\mutable\StringUnorderedSequentialHashSetSpec.scala" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\test\scala\org\contakt\data\scala\collection\mutable\StringUnorderedSequentialHashSetSpecSetup.scala" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala" afterPath="$PROJECT_DIR$/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpec.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpec.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpecSetup.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpecSetup.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala" afterPath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSetSpecSetup.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSetSpecSetup.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala" afterPath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpecSetup.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpecSetup.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scala-rdf.iml" afterPath="$PROJECT_DIR$/scala-rdf.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scala-rdf.sublime-workspace" afterPath="$PROJECT_DIR$/scala-rdf.sublime-workspace" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/scalardf.sc" afterPath="$PROJECT_DIR$/src/test/scala/scalardf.sc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="scala-rdf.iws" />
@@ -148,7 +148,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -427,6 +426,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -802,6 +802,8 @@
       <workItem from="1392332316539" duration="23000" />
       <workItem from="1392333532669" duration="104000" />
       <workItem from="1392333673938" duration="77000" />
+      <workItem from="1392759104829" duration="334000" />
+      <workItem from="1392853698759" duration="203000" />
     </task>
     <task id="LOCAL-00001" summary="Have added more Set methods &amp; matching tests, all of which are successfully working.">
       <created>1391554155000</created>
@@ -811,14 +813,14 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22973000" />
+    <option name="totallyTimeSpent" value="23510000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27272728" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27272728" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -828,7 +830,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32792208" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SQL" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -918,11 +920,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="569" />
-      </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="569" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/package.scala">
