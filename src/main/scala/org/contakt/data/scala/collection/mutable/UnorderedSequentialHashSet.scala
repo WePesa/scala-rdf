@@ -19,7 +19,11 @@ class UnorderedSequentialHashSet[A] extends HashSet[A] with UnorderedSequentialS
 
 	override def -(elem1: A, elem2: A, elems: A*) = UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(super.-(elem1, elem2, elems:_*))
 
-	override def collect[B](pf: PartialFunction[A, B]) = UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(super.collect(pf))
+	override def apply(elem: A) = super.apply(elem)
+
+	override def canEqual(that: Any) = super.canEqual(that)
+
+	override def collect[B](pf: PartialFunction[A, B]) = UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(this.asInstanceOf[HashSet[A]].collect(pf))
 
 	override def empty = UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(super.empty)
 
@@ -29,7 +33,7 @@ class UnorderedSequentialHashSet[A] extends HashSet[A] with UnorderedSequentialS
 
 	override def grouped(size: Int) = UnorderedSequentialHashSet.hashSetIteratorToUnorderedSequentialHashSetIterator(super.grouped(size))
 
-	override def map[B](f: (A) => B) = UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(super.map(f))
+	override def map[B](f: (A) => B) = UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(this.asInstanceOf[HashSet[A]].map(f))
 
 	override def partition(p: (A) => Boolean) = {
 		val result = super.partition(p)

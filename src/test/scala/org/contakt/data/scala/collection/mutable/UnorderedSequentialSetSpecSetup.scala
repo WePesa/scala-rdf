@@ -6,7 +6,7 @@ import scala.collection.Traversable
  * Trait for implementation specific setup of 'UnorderedSequentialSet' types,
  * which allows the same tests to work for different implementations.
  * 'T' is the element type of the Traversable implementation,
- * and 'TSet' is the class implementing 'UnorderedSequentialSetSpec[T]' that should be used.
+ * and 'TSet' is the class implementing 'UnorderedSequentialSet[T]' that should be used.
  */
 trait UnorderedSequentialSetSpecSetup[T, TSet <: UnorderedSequentialSet[T]] {
 

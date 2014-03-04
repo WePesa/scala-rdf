@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99a87e67-f4d2-4818-bf00-6c6a07402033" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\test\scala\org\contakt\data\scala\collection\mutable\StringUnorderedSequentialHashSetSpec.scala" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tony\SkyDrive\Projects\scala-rdf\src\test\scala\org\contakt\data\scala\collection\mutable\StringUnorderedSequentialHashSetSpecSetup.scala" afterPath="" />
+    <list default="true" id="99a87e67-f4d2-4818-bf00-6c6a07402033" name="Default" comment="Added a new 'SparqlProcessor' trait for classes that can process SPARQL queries &amp; updates.  Also started adding SPARQL tests.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SparqlProcessor.scala" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SparqlProcessorSpec.scala" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SparqlProcessorSpecSetup.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala" afterPath="$PROJECT_DIR$/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpecSetup.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpecSetup.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpec.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpec.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Tony.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Tony.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala" afterPath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSetSpecSetup.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSetSpecSetup.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala" afterPath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpecSetup.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpecSetup.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scala-rdf.iml" afterPath="$PROJECT_DIR$/scala-rdf.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scala-rdf.sublime-workspace" afterPath="$PROJECT_DIR$/scala-rdf.sublime-workspace" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/scalardf.sc" afterPath="$PROJECT_DIR$/src/test/scala/scalardf.sc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="scala-rdf.iws" />
@@ -112,6 +112,8 @@
         <option value="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SetSpecSetup.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpecSpecSetup.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SetSpec.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SparqlProcessorSpec.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala" />
       </list>
     </option>
   </component>
@@ -147,7 +149,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -340,64 +341,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="semweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mutable" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sesame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="package.scala" />
-              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala-rdf" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala-rdf" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="org" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="contakt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="scala" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -426,6 +369,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -804,6 +748,8 @@
       <workItem from="1392333673938" duration="77000" />
       <workItem from="1392759104829" duration="334000" />
       <workItem from="1392853698759" duration="203000" />
+      <workItem from="1393965447693" duration="435000" />
+      <workItem from="1393965913033" duration="732000" />
     </task>
     <task id="LOCAL-00001" summary="Have added more Set methods &amp; matching tests, all of which are successfully working.">
       <created>1391554155000</created>
@@ -813,14 +759,14 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23510000" />
+    <option name="totallyTimeSpent" value="24677000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27272728" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27272728" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -830,7 +776,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32792208" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SQL" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -902,7 +848,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Have added more Set methods &amp; matching tests, all of which are successfully working." />
-    <option name="LAST_COMMIT_MESSAGE" value="Have added more Set methods &amp; matching tests, all of which are successfully working." />
+    <MESSAGE value="Added a new 'SparqlProcessor' trait for classes that can process SPARQL queries &amp; updates.  Also started adding SPARQL tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a new 'SparqlProcessor' trait for classes that can process SPARQL queries &amp; updates.  Also started adding SPARQL tests." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -912,6 +859,13 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SparqlProcessorSpec.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="85" selection-start="1859" selection-end="1859" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="952">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="0" selection-start="1074" selection-end="1074" vertical-scroll-proportion="0.0" vertical-offset="137" max-vertical-offset="731">
@@ -952,6 +906,20 @@
     <entry file="file://$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpec.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="6" selection-start="251" selection-end="251" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="129" selection-start="1847" selection-end="1847" vertical-scroll-proportion="0.5300668" vertical-offset="102" max-vertical-offset="1275">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SparqlProcessorSpec.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="8" selection-start="833" selection-end="833" vertical-scroll-proportion="0.37861916" vertical-offset="0" max-vertical-offset="898">
           <folding />
         </state>
       </provider>

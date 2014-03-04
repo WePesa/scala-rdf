@@ -2,6 +2,7 @@
   <dictionary name="Tony">
     <words>
       <w>barfoo</w>
+      <w>sparql</w>
     </words>
   </dictionary>
 </component>

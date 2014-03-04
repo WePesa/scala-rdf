@@ -84,7 +84,12 @@ import scala.collection.mutable.Buffer
 	/** Send a message to this scriptable object. */
 	// def <<(cmd: Message[A]): Unit 
   
-	/** Adds an element to this mutable set. */
+	/**
+	 * Adds an element to this mutable set.
+	 *
+	 * @param elem the element to be added
+	 * @return true if the element was not yet present in the set, false otherwise.
+	 */
 	def add(elem: A): Boolean 
   
 	/** Appends all elements of this mutable set to a string builder. */
@@ -103,14 +108,19 @@ import scala.collection.mutable.Buffer
 	// def andThen[A](g: (Boolean) => A): (A) => A 
   
 	/** Tests if some element is contained in this set. */
-	def apply(elem: A): Boolean 
+	def apply(elem: A): Boolean = contains(elem)
   
 	// def asParIterable: ParIterable[A] 
   
 	// def asParSeq: ParSeq[A] 
   
 	/** Method called from equality methods, so that user-defined subclasses can refuse to be equal to other collections of the same kind. */
-	def canEqual(that: Any): Boolean 
+	def canEqual(that: Any) = {
+		that match {
+			case uss: UnorderedSequentialSet[A] => true
+			case _ => false
+		}
+	}
   
 	/** Removes all elements from the set. */
 	def clear(): Unit 

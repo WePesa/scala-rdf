@@ -1,7 +1,9 @@
 package org.contakt.data.semweb.scala.collection.mutable.sesame
 
 import scala.collection.JavaConversions._
+import scala.util.Try
 import org.openrdf.model.{Resource, Statement}
+import org.openrdf.query.{BindingSet, QueryLanguage}
 import org.openrdf.repository.{Repository, RepositoryConnection}
 import org.openrdf.repository.sail.SailRepository
 import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer
@@ -15,7 +17,7 @@ import org.contakt.data.scala.collection.mutable.UnorderedSequentialSet
  * (from SesameTripleSetConfiguration) need to be able
  * to be mixed-in via traits to suit different user choices.
  */
-class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statement] {
+class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statement] with SparqlProcessor {
 
 	private val defaultConnection: RepositoryConnection = rep.getConnection
 
@@ -36,7 +38,7 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
   /** Tests if some statement is contained in this triple set. */
   def contains(stmt: Statement): Boolean = defaultConnection.hasStatement(stmt, false, contexts:_*)
 
-  def iterator: Iterator[Statement] = iterator(defaultConnection)
+  def iterator: Iterator[Statement] = SesameTripleSet.iterator(defaultConnection)
 
   def :\[B](z: B)(op: (org.openrdf.model.Statement, B) => B): B = ???
   def /:[B](z: B)(op: (B, org.openrdf.model.Statement) => B): B = ???
@@ -62,14 +64,36 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
   	this
 	}
 
-	def add(elem: org.openrdf.model.Statement): Boolean = ???
+	/**
+	 * Adds an element to this mutable set.
+	 *
+	 * @param stmt the triple to be added
+	 * @return true if the element was not yet present in the set, false otherwise.
+	 */
+	def add(stmt: Statement): Boolean = {
+		if (contains(stmt)) {
+			false
+		} else {
+			defaultConnection.add(stmt)
+			true
+		}
+	}
+
 	def addString(b: StringBuilder,start: String,sep: String,end: String): StringBuilder = ???
 	def addString(b: StringBuilder,sep: String): StringBuilder = ???
 	def addString(b: StringBuilder): StringBuilder = ???
 	def aggregate[B](z: B)(seqop: (B, org.openrdf.model.Statement) => B,combop: (B, B) => B): B = ???
-	def apply(elem: org.openrdf.model.Statement): Boolean = ???
-	def canEqual(that: Any): Boolean = ???
-	def clear(): Unit = ???
+	// def apply(elem: org.openrdf.model.Statement): Boolean = ???
+
+	/**
+	 * Removes all elements that can be removed from the triple set.
+	 * For some Sesame repository types, e.g. those with RDFS inferencing,
+	 * it is not possible to remove all triples.
+	 */
+	def clear() = sparqlUpdate(
+		"DELETE { ?s ?p ?o . } WHERE { ?s ?p ?o . }"
+	)
+		
 	def collect[B](pf: PartialFunction[org.openrdf.model.Statement,B]): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[B] = ???
 	def collectFirst[B](pf: PartialFunction[org.openrdf.model.Statement,B]): Option[B] = ???
 	def copyToBuffer[B >: org.openrdf.model.Statement](dest: scala.collection.mutable.Buffer[B]): Unit = ???
@@ -82,6 +106,26 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
    * @return a Sesame triple set with no triples.
    */
   def empty = SesameTripleSet.empty
+
+	/** Compares this set with another object for equality. */
+	override def equals(that: Any) = {
+		if (canEqual(that)) {
+			val ussThat = that.asInstanceOf[UnorderedSequentialSet[Statement]]
+			if (longSize != ussThat.longSize) {
+				false
+			} else {
+				// Check that every statement in 'uss' is also in this triple set.
+				val iter = ussThat.iterator
+				var areEqual = true
+				while (areEqual && iter.hasNext) {
+					areEqual = contains(iter.next)
+				}
+				areEqual
+			}
+		} else {
+			false
+		}
+	}  
 
 	def exists(p: org.openrdf.model.Statement => Boolean): Boolean = ???
 	def filter(p: org.openrdf.model.Statement => Boolean): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
@@ -132,20 +176,30 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 	def update(elem: org.openrdf.model.Statement,included: Boolean): Unit = ???
 
 	// **** Other methods ****
-
-  private def contexts: Seq[Resource] = RepositoryResultIterator(defaultConnection.getContextIDs).toSeq
-
-  def iterator(connection: RepositoryConnection): Iterator[Statement] = {
-    val results = connection.getStatements(null, null, null, true)
-    new RepositoryResultIterator(results)
-  }
+	private def contexts = SesameTripleSet.contexts(defaultConnection)
 
   /** The size of this triple set. */
   override def longSize: Long = defaultConnection.size(contexts:_*)
 
+  def sparqlAsk(query: String) = SesameTripleSet.sparqlAsk(query)(defaultConnection)
+
+  def sparqlConstruct(query: String) = SesameTripleSet.sparqlConstruct(query)(defaultConnection)
+
+  def sparqlDescribe(query: String) = SesameTripleSet.sparqlDescribe(query)(defaultConnection)
+
+  def sparqlSelect(query: String) = SesameTripleSet.sparqlSelect(query)(defaultConnection)
+
+  def sparqlUpdate(update: String) = SesameTripleSet.sparqlUpdate(update)(defaultConnection)
+
 }
 
 object SesameTripleSet {
+
+	/**
+	 * Returns a sequence of the contexts in the Repository to which the
+	 * RepositoryConnection is connected.
+	 */
+  def contexts(connection: RepositoryConnection): Seq[Resource] = RepositoryResultIterator(connection.getContextIDs).toSeq
 
   /**
    * Returns an <strong>in-memory</strong> Sesame triple set
@@ -174,6 +228,71 @@ object SesameTripleSet {
     repository.initialize()
 
     new SesameTripleSet(repository)
+  }
+
+
+	/**
+	 * Returns an iterator for the statements in the Repository to which the
+	 * RepositoryConnection is connected.
+	 */
+  def iterator(implicit connection: RepositoryConnection): Iterator[Statement] = {
+    val results = connection.getStatements(null, null, null, true)
+    new RepositoryResultIterator(results)
+  }
+
+  /**
+   * Returns the results of a SPARQL ASK query on the Repository to which the
+   * RepositoryConnection is connected.
+   */
+  def sparqlAsk(query: String)(implicit connection: RepositoryConnection): Try[Boolean] = {
+  	Try {
+	  	val preparedQuery = connection.prepareBooleanQuery(QueryLanguage.SPARQL, query)
+	  	preparedQuery.evaluate
+  	}
+  }
+
+  /**
+   * Returns the results of a SPARQL CONSTRUCT query on the Repository to which the
+   * RepositoryConnection is connected.
+   */
+  def sparqlConstruct(query: String)(implicit connection: RepositoryConnection): Try[Iterator[Statement]] = {
+  	Try {
+	  	val preparedQuery = connection.prepareGraphQuery(QueryLanguage.SPARQL, query)
+	  	QueryResultIterator(preparedQuery.evaluate)
+  	}
+  }
+
+  /**
+   * Returns the results of a SPARQL DESCRIBE query on the Repository to which the
+   * RepositoryConnection is connected.
+   */
+  def sparqlDescribe(query: String)(implicit connection: RepositoryConnection): Try[Iterator[Statement]] = {
+  	Try {
+	  	val preparedQuery = connection.prepareGraphQuery(QueryLanguage.SPARQL, query)
+	  	QueryResultIterator(preparedQuery.evaluate)
+  	}
+  }
+
+  /**
+   * Returns the results of a SPARQL SELECT query on the Repository to which the
+   * RepositoryConnection is connected.
+   */
+  def sparqlSelect(query: String)(implicit connection: RepositoryConnection): Try[Iterator[BindingSet]] = {
+  	Try {
+	  	val preparedQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, query)
+	  	QueryResultIterator(preparedQuery.evaluate)
+  	}
+  }
+
+  /**
+   * Executes a SPARQL INSERT or DELETE update on the Repository to which the
+   * RepositoryConnection is connected.
+   */
+  def sparqlUpdate(update: String)(implicit connection: RepositoryConnection): Try[Unit] = {
+  	Try {
+	  	val preparedUpdate = connection.prepareUpdate(QueryLanguage.SPARQL, update)
+	  	preparedUpdate.execute
+  	}
   }
 
 }

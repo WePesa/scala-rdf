@@ -40,13 +40,16 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
   }
 
   it should "be possible to add multiple elements to an empty set" in {
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
     val newSet = empty
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0): size = ${newSet.size}")
-    newSet += (newElem1, newElem2)
+    newSet += (elem1, elem2)
     assert(newSet.size == 2, s"new set did not contain 2 elements as expected (size != 2): size = ${newSet.size}")
     val newSet2 = empty
     assert(newSet2.size == 0, s"new set (2) was not empty as expected (size != 0): size = ${newSet2.size}")
-    newSet2 += (newElem1, newElem2, newElem3)
+    newSet2 += (elem1, elem2, elem3)
     assert(newSet2.size == 3, s"new set (3) did not contain 3 elements as expected (size != 3): size = ${newSet2.size}")
   }
 
@@ -59,13 +62,17 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
   }
 
   it should "not be possible to add the same element twice to a set" in {
-    val newSet = empty
     val elem = newElem1
+    val newSet = empty
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0): size = ${newSet.size}")
     newSet += elem
     assert(newSet.size == 1, s"new set did not contain 1 element as expected (size != 1 after 1st attempt): size = ${newSet.size}")
     newSet += elem
     assert(newSet.size == 1, s"new set did not contain 1 element as expected (size != 1 after 2nd attempt): size = ${newSet.size}")
+    val newSet2 = empty
+    assert(newSet2.size == 0, s"new set 2 was not empty as expected (size != 0): size = ${newSet2.size}")
+    assert(newSet2.add(elem) && (newSet2.size == 1), s"new set 2 did not contain 1 element as expected (add failed or size != 1): size = ${newSet2.size}")
+    assert(!newSet2.add(elem) && (newSet2.size == 1), s"new set 2 did not contain 1 element as expected (add succeeded or size != 1: size = ${newSet2.size}")
   }
 
   it should "be possible to remove the only element from a set" in {
@@ -115,6 +122,17 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(newSet.size == 1, s"new set did not contain 1 element as expected (size != 0 after -=): size = ${newSet.size}")
   }
 
+  it should "be possible to clear the elements" in {
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val newSet = empty
+    assert(newSet.size == 0, s"new set was not empty as expected (size != 0 before starting): size = ${newSet.size}")
+    newSet += (elem1, elem2)
+    assert(newSet.size == 2, s"new set did not contain 2 elements as expected (size != 2): size = ${newSet.size}")
+    newSet.clear
+    assert(newSet.size == 0, s"new set was not empty as expected (size != 0 after clearing): size = ${newSet.size}")
+  }
+
   it should "be possible to iterate through all of the elements" in {
     val controlSet = new HashSet[T]()
     val newSet = empty
@@ -124,6 +142,15 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(controlSet.size == 0, s"control set was not empty as expected (size != 0 before starting): size = ${controlSet.size}")
     for (elem <- newSet.iterator) { controlSet += elem }
     assert(controlSet.size == 2, s"control set did not have the number of elements expected (size != 2 after adding elements): size = ${controlSet.size}")
+  }
+
+  it should "have an 'apply' method that does a 'contains' check" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    newSet += elem1
+    assert(newSet(elem1) == newSet.contains(elem1), "apply/contains comparison failed for element that is in set")
+    assert(newSet(elem2) == newSet.contains(elem2), "apply/contains comparison failed for element that is not in set")
   }
 
 }
