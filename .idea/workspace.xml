@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99a87e67-f4d2-4818-bf00-6c6a07402033" name="Default" comment="Added a new 'SparqlProcessor' trait for classes that can process SPARQL queries &amp; updates.  Also started adding SPARQL tests.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SparqlProcessor.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SparqlProcessorSpec.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SparqlProcessorSpecSetup.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala" afterPath="$PROJECT_DIR$/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpec.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpec.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Tony.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Tony.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala" afterPath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala" afterPath="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpecSetup.scala" afterPath="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpecSetup.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scala-rdf.iml" afterPath="$PROJECT_DIR$/scala-rdf.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scala-rdf.sublime-workspace" afterPath="$PROJECT_DIR$/scala-rdf.sublime-workspace" />
+    <list default="true" id="99a87e67-f4d2-4818-bf00-6c6a07402033" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="scala-rdf.iws" />
@@ -77,7 +66,20 @@
     <favorites_list name="scala-rdf" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="31" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.60225445" vertical-offset="0" max-vertical-offset="621">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -114,6 +116,7 @@
         <option value="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SetSpec.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SparqlProcessorSpec.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -346,6 +349,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="collection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mutable" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -749,17 +756,21 @@
       <workItem from="1392759104829" duration="334000" />
       <workItem from="1392853698759" duration="203000" />
       <workItem from="1393965447693" duration="435000" />
-      <workItem from="1393965913033" duration="732000" />
+      <workItem from="1393965913033" duration="955000" />
     </task>
     <task id="LOCAL-00001" summary="Have added more Set methods &amp; matching tests, all of which are successfully working.">
       <created>1391554155000</created>
       <updated>1391554155000</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added a new 'SparqlProcessor' trait for classes that can process SPARQL queries &amp; updates.  Also started adding SPARQL tests.">
+      <created>1393966668188</created>
+      <updated>1393966668188</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24677000" />
+    <option name="totallyTimeSpent" value="24900000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
@@ -920,6 +931,16 @@
     <entry file="file://$PROJECT_DIR$/src/test/scala/org/contakt/data/scala/collection/mutable/SparqlProcessorSpec.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="8" selection-start="833" selection-end="833" vertical-scroll-proportion="0.37861916" vertical-offset="0" max-vertical-offset="898">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="31" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.60225445" vertical-offset="0" max-vertical-offset="621">
           <folding />
         </state>
       </provider>
