@@ -15,6 +15,12 @@ class UnorderedSequentialHashSet[A] extends HashSet[A] with UnorderedSequentialS
 
 	override def +(elem1: A, elem2: A, elems: A*) = UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(super.+(elem1, elem2, elems:_*))
 
+  /** adds all elements produced by an UnorderedSequentialSet to this mutable set. */
+  def ++=(xs: UnorderedSequentialSet[A]) = {
+    xs.iterator.foreach{add(_)}
+    this
+  }
+
 	override def -(elem: A) = UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(super.-(elem))
 
 	override def -(elem1: A, elem2: A, elems: A*) = UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(super.-(elem1, elem2, elems:_*))

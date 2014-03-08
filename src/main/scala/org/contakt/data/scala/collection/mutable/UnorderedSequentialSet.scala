@@ -55,7 +55,11 @@ import scala.collection.mutable.Buffer
 	// def ++:[B](that: TraversableOnce[B]): Set[B] 
   
 	/** adds all elements produced by a TraversableOnce to this mutable set. */
-	// def ++=(xs: TraversableOnce[A]): Set.this.type 
+	def ++=(xs: TraversableOnce[A]): UnorderedSequentialSet[A]
+  
+	/** adds all elements produced by an UnorderedSequentialSet to this mutable set. */
+	// def ++=(xs: TraversableOnce[A]): Set.this.type // TODO: investigate supporting TraversableOnce trait
+	def ++=(xs: UnorderedSequentialSet[A]): UnorderedSequentialSet[A] 
   
 	/** adds two or more elements to this mutable set. */
 	def +=(elem1: A, elem2: A, elems: A*): UnorderedSequentialSet[A] 
@@ -178,7 +182,7 @@ import scala.collection.mutable.Buffer
 	/** Selects all elements of this mutable set which do not satisfy a predicate. */
 	def filterNot(p: (A) => Boolean): UnorderedSequentialSet[A]
   
-	/** Finds the first element of the mutable set satisfying a predicate, if any. */
+	/** Finds an element of the mutable set satisfying a predicate, if any. */
 	def find(p: (A) => Boolean): Option[A] 
   
 	/** [use case] Builds a new collection by applying a function to all elements of this mutable set and using the elements of the resulting collections. */
@@ -486,5 +490,20 @@ import scala.collection.mutable.Buffer
 
  	/** The size of this mutable set. */
 	def longSize: Long = size.toLong
+
+}
+
+class GroupIterator[A](iterator: Iterator[A], size: Int, empty: ()=>UnorderedSequentialSet[A]) extends Iterator[UnorderedSequentialSet[A]] {
+
+  private val groupIterator = iterator.grouped(size)
+
+  def hasNext = groupIterator.hasNext
+
+  def next = {
+    val nextGroup = groupIterator.next
+    val result = empty()
+    result ++= nextGroup
+    result
+  }
 
 }

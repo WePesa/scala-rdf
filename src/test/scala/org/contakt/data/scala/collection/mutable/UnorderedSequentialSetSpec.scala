@@ -21,25 +21,25 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     afterSetup()
   }
 
-  "An empty set" should "have a concrete type" in {
+  "An unordered sequential set" should "have a concrete type for an empty set" in {
     info(empty.getClass.getName)
   }
 
-  it should "be empty" in {
+  it should "be empty if created empty" in {
     val emptySet = empty
     assert(emptySet.size == 0, "empty set was not empty as expected (size != 0)")
     assert(emptySet.isEmpty, "empty set was not empty as expected (!isEmpty)")
     assert(!emptySet.iterator.hasNext, "empty set was not empty as expected (iterator has next)")
   }
 
-  it should "be possible to add an element to an empty set" in {
+  it should "allow adding an element to an empty set" in {
     val newSet = empty
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0): size = ${newSet.size}")
     newSet += newElem1
     assert(newSet.size == 1, s"new set did not contain 1 element as expected (size != 1): size = ${newSet.size}")
   }
 
-  it should "be possible to add multiple elements to an empty set" in {
+  it should "allow adding multiple elements to an empty set" in {
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -53,7 +53,26 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(newSet2.size == 3, s"new set (3) did not contain 3 elements as expected (size != 3): size = ${newSet2.size}")
   }
 
-  it should "contain an element that was added to it" in {
+  it should "allow adding the contents of another set or iterator to it" in {
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    val newSet = empty
+    val newSet2 = empty
+    newSet += elem1
+    assert(newSet.size == 1, s"new set had unexpected size (size != 1): size = ${newSet.size}")
+    newSet2 += (elem2, elem3)
+    assert(newSet2.size == 2, s"new set 2 had unexpected size (size != 2): size = ${newSet2.size}")
+    newSet ++= newSet2
+    assert(newSet.size == 3, s"new set had unexpected size (size != 3): size = ${newSet.size}")
+    val newSet3 = empty
+    newSet3 += elem1
+    assert(newSet3.size == 1, s"new set 3 had unexpected size (size != 1): size = ${newSet.size}")
+    newSet3 ++= newSet2.iterator
+    assert(newSet3.size == 3, s"new set 3 had unexpected size (size != 3): size = ${newSet.size}")
+  }
+
+  it should "contain an element that was already added to it" in {
     val newSet = empty
     newSet += newElem1
     assert(newSet.contains(newElem1), s"new set did not contain the element added to it (#1), as expected")
@@ -61,7 +80,7 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(newSet.contains(newElem2), s"new set did not contain the element added to it (#2), as expected")
   }
 
-  it should "not be possible to add the same element twice to a set" in {
+  it should "not allow adding the same element twice to it" in {
     val elem = newElem1
     val newSet = empty
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0): size = ${newSet.size}")
@@ -75,7 +94,7 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(!newSet2.add(elem) && (newSet2.size == 1), s"new set 2 did not contain 1 element as expected (add succeeded or size != 1: size = ${newSet2.size}")
   }
 
-  it should "be possible to remove the only element from a set" in {
+  it should "allow removing the only element from it" in {
     val newSet = empty
     val elem = newElem1
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 before starting): size = ${newSet.size}")
@@ -85,7 +104,7 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 after finishing): size = ${newSet.size}")
   }
 
-  it should "be possible to remove the only elements from a set" in {
+  it should "allow removing the only elements from it" in {
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -103,7 +122,7 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(newSet2.size == 0, s"new set 2 was not empty as expected (size != 0 after finishing): size = ${newSet2.size}")
   }
 
-  it should "not matter if you try to remove a element that is not a member from an empty set" in {
+  it should "ignore if you try to remove a element when it is empty" in {
     val newSet = empty
     val elem = newElem1
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 before starting): size = ${newSet.size}")
@@ -111,7 +130,7 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 after finishing): size = ${newSet.size}")
   }
 
-  it should "not matter if you try to remove a element that is not a member from a non-empty set" in {
+  it should "ignore if you try to remove a element that is not in it" in {
     val newSet = empty
     val elem1 = newElem1
     val elem2 = newElem2
@@ -122,7 +141,7 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(newSet.size == 1, s"new set did not contain 1 element as expected (size != 0 after -=): size = ${newSet.size}")
   }
 
-  it should "be possible to clear the elements" in {
+  it should "allow clearing the elements" in {
     val elem1 = newElem1
     val elem2 = newElem2
     val newSet = empty
@@ -133,7 +152,7 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 after clearing): size = ${newSet.size}")
   }
 
-  it should "be possible to iterate through all of the elements" in {
+  it should "allow iterating through all of the elements" in {
     val controlSet = new HashSet[T]()
     val newSet = empty
     newSet += newElem1
@@ -151,6 +170,130 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     newSet += elem1
     assert(newSet(elem1) == newSet.contains(elem1), "apply/contains comparison failed for element that is in set")
     assert(newSet(elem2) == newSet.contains(elem2), "apply/contains comparison failed for element that is not in set")
+  }
+
+  it should "allow counting of elements based on a filter function" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2)
+    val count1 = newSet.count{_ == elem1}
+    assert(count1 == 1, s"new set had wrong number of matching elements (count != 1): count = $count1")
+    val count2 = newSet.count{_ == elem3}
+    assert(count2 == 0, s"new set had wrong number of matching elements (count != 0): count = $count2")
+  }
+
+  it should "allow testing for matching elements based on a filter function" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2)
+    val exists1 = newSet.exists{_ == elem1}
+    assert(exists1, "new set had no matching elements")
+    val exists2 = newSet.exists{_ == elem3}
+    assert(!exists2, "new set had unexpected matching elements")
+  }
+
+  it should "allow returning a subset based on matching a filter function" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2)
+    val newSet1 = newSet.filter{_ == elem1}
+    assert(newSet1.size == 1, s"filtered set had wrong number of elements (size != 1): size = ${newSet1.size}")
+    val newSet2 = newSet.filter{_ == elem3}
+    assert(newSet2.size == 0, s"filtered set had wrong number of elements (size != 0): size = ${newSet2.size}")
+  }
+
+  it should "allow returning a subset based on not matching a filter function" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2)
+    val newSet1 = newSet.filterNot{_ == elem1}
+    assert(newSet1.size == 1, s"filtered set had wrong number of elements (size != 1): size = ${newSet1.size}")
+    val newSet2 = newSet.filterNot{_ == elem3}
+    assert(newSet2.size == 2, s"filtered set had wrong number of elements (size != 2): size = ${newSet2.size}")
+  }
+
+  it should "allow find an element that matches a filter function, if any" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2)
+    newSet.find{_ == elem1} match {
+      case Some(elem) => // ignore
+      case None =>
+        assert(false, "failed to find matching element")
+    }
+    newSet.find{_ == elem3} match {
+      case None => // ignore
+      case Some(elem) =>
+        assert(false, "unexpectedly found matching element")
+    }
+  }
+
+  it should "allow testing whether all elements match a filter function" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2)
+    assert(newSet.forall{elem => !(elem == elem3)}, "unexpectedly found a filter match")
+    assert(!newSet.forall{elem => elem == elem1}, "unexpectedly found all elements matching a filter")
+  }
+
+  it should "allow iterating over all elements and applying a function" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2)
+    var count = 0
+    newSet.foreach{elem => count += 1}
+    assert(count == 2, s"count different to expected (count != 2): count = $count")
+    val newSet2 = empty
+    newSet2 += (elem1, elem2, elem3)
+    count = 0
+    newSet2.foreach{elem => count += 1}
+    assert(count == 3, s"count different to expected (count != 3): count = $count")
+  }
+
+  it should "be able to iterate over elements and return them in fixed size groups" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    var count = 0
+    for (group <- newSet.grouped(1)) {
+      assert(group.size == 1, s"element group was the wrong size (size != 1): size = ${group.size}")
+      count += 1
+    }
+    assert(count == 3, s"unexpected element group count (count != 3): count = $count")
+    count = 0
+    for (group <- newSet.grouped(2)) {
+      assert((group.size >= 1) && (group.size <= 2), s"element group was the wrong size (size != 1 or 2): size = ${group.size}")
+      count += 1
+    }
+    assert(count == 2, s"unexpected element group count (count != 2): count = $count")
+    count = 0
+    for (group <- newSet.grouped(3)) {
+      assert(group.size == 3, s"element group was the wrong size (size != 3 for grouped(3)): size = ${group.size}")
+      count += 1
+    }
+    assert(count == 1, s"unexpected element group count (count != 1 for grouped(3): count = $count")
+    count = 0
+    for (group <- newSet.grouped(4)) {
+      assert(group.size == 3, s"element group was the wrong size (size != 3 for grouped(4)): size = ${group.size}")
+      count += 1
+    }
+    assert(count == 1, s"unexpected element group count (count != 1 for grouped(4)): count = $count")
   }
 
 }
