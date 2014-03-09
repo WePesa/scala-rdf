@@ -35,8 +35,10 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
   it should "allow adding an element to an empty set" in {
     val newSet = empty
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0): size = ${newSet.size}")
+    assert(newSet.isEmpty, "new set was not empty as expected (!isEmpty)")
     newSet += newElem1
     assert(newSet.size == 1, s"new set did not contain 1 element as expected (size != 1): size = ${newSet.size}")
+    assert(newSet.nonEmpty, "new set was not non-empty as expected (!nonEmpty)")
   }
 
   it should "allow adding multiple elements to an empty set" in {
@@ -313,6 +315,18 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(stringValue.contains(elem2.toString), s"string value did not contain 'elem2' string (${q}${q}${q}$elem2${q}${q}${q}): $stringValue")
     assert(stringValue.contains(elem3.toString), s"string value did not contain 'elem3' string (${q}${q}${q}$elem3${q}${q}${q}): $stringValue")
     assert(stringValue.split(sep).size == 3, s"string did not split on the 'sep' string (${q}$sep${q}) into the correct number of elements (3): $stringValue")
+  }
+
+  it should "be possible to partition the elements of a set based on a predicate" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val (partition1, partition2) = newSet.partition{_ == elem1}
+    assert(partition1.size < newSet.size, "partition 1 not smaller than new set as expected: size = ${partition1.size}")
+    assert(partition2.size < newSet.size, "partition 2 not smaller than new set as expected: size = ${partition2.size}")
+    assert(partition1.size + partition2.size == newSet.size, "partitions did not add up to original new set: sum = ${partition1.size + partition2.size}")
   }
 
 }

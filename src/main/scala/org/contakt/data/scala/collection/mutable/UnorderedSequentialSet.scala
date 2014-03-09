@@ -288,12 +288,17 @@ import scala.collection.mutable.Buffer
 	def mkString(start: String, sep: String, end: String): String = addString(new StringBuilder(), start, sep, end).toString
   
 	/** Tests whether the mutable set is not empty. */
-	def nonEmpty: Boolean 
+	def nonEmpty: Boolean = !isEmpty
   
 	/** Returns a parallel implementation of this collection. */
 	// def par: ParSet[A] 
   
-	/** Partitions this mutable set in two mutable sets according to a predicate. */
+	/**
+   * Partitions this mutable set into two mutable sets according to a predicate.
+   *
+   * @param p the predicate on which to partition.
+   * @return a pair of strings: the first string consists of all elements that satisfy the predicate p and the second string consists of all elements that don't. The relative order of the elements in the resulting strings is the same as in the original string.
+   */
 	def partition(p: (A) => Boolean): (UnorderedSequentialSet[A], UnorderedSequentialSet[A]) 
   
 	/** [use case] Multiplies up the elements of this collection. */

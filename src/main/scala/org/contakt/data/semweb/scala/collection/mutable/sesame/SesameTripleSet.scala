@@ -198,8 +198,19 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
     resultSet
   }
 
-	def nonEmpty: Boolean = ???
-	def partition(p: org.openrdf.model.Statement => Boolean): (org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement], org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement]) = ???
+  /**
+   * Partitions this mutable set into two triple sets according to a predicate.
+   *
+   * @param p the predicate on which to partition.
+   * @return a pair of sets: the first set consists of all elements that satisfy the predicate p and the second set consists of all elements that don't. The relative order of the elements in the resulting sets is the same as in the original set.
+   */
+	def partition(p: Statement => Boolean) = {
+    val partition1 = empty
+    val partition2 = empty
+    foreach{stmt => if (p(stmt)) partition1.add(stmt) else partition2.add(stmt)}
+    (partition1, partition2)
+  }
+
 	def reduce[A1 >: org.openrdf.model.Statement](op: (A1, A1) => A1): A1 = ???
 	def reduceLeft[B >: org.openrdf.model.Statement](op: (B, org.openrdf.model.Statement) => B): B = ???
 	def reduceLeftOption[B >: org.openrdf.model.Statement](op: (B, org.openrdf.model.Statement) => B): Option[B] = ???
