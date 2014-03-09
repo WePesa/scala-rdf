@@ -25,6 +25,10 @@ class UnorderedSequentialHashSet[A] extends HashSet[A] with UnorderedSequentialS
 
 	override def -(elem1: A, elem2: A, elems: A*) = UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(super.-(elem1, elem2, elems:_*))
 
+  override def addString(b: scala.StringBuilder) = super.addString(b)
+  override def addString(b: scala.StringBuilder, sep: String) = super.addString(b, sep)
+  override def addString(b: scala.StringBuilder, start: String, sep: String, end: String) = super.addString(b, start, sep, end)
+
 	override def apply(elem: A) = super.apply(elem)
 
 	override def canEqual(that: Any) = super.canEqual(that)
@@ -40,6 +44,12 @@ class UnorderedSequentialHashSet[A] extends HashSet[A] with UnorderedSequentialS
 	override def grouped(size: Int) = UnorderedSequentialHashSet.hashSetIteratorToUnorderedSequentialHashSetIterator(super.grouped(size))
 
 	override def map[B](f: (A) => B) = UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(this.asInstanceOf[HashSet[A]].map(f))
+
+  def mapToSet[B](f: (A) => B) = map(f)
+
+  override def mkString: String = super.mkString
+  override def mkString(sep: String) = super.mkString(sep)
+  override def mkString(start: String, sep: String, end: String) = super.mkString(start, sep, end)
 
 	override def partition(p: (A) => Boolean) = {
 		val result = super.partition(p)

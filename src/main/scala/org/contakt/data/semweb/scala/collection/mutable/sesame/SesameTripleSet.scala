@@ -8,7 +8,8 @@ import org.openrdf.repository.{Repository, RepositoryConnection}
 import org.openrdf.repository.sail.SailRepository
 import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer
 import org.openrdf.sail.memory.MemoryStore
-import org.contakt.data.scala.collection.mutable.{GroupIterator, UnorderedSequentialSet}
+import org.contakt.data.scala.collection.mutable.{UnorderedSequentialHashSet, GroupIterator, UnorderedSequentialSet}
+import scala.collection.Set
 
 /**
  * Sesame implementation of an RDF triple store as
@@ -91,9 +92,6 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 		}
 	}
 
-	def addString(b: StringBuilder,start: String,sep: String,end: String): StringBuilder = ???
-	def addString(b: StringBuilder,sep: String): StringBuilder = ???
-	def addString(b: StringBuilder): StringBuilder = ???
 	def aggregate[B](z: B)(seqop: (B, org.openrdf.model.Statement) => B,combop: (B, B) => B): B = ???
 	// def apply(elem: org.openrdf.model.Statement): Boolean = ???
 
@@ -190,11 +188,16 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
   /** Tests if this triple set is empty. */
 	def isEmpty = (longSize == 0)
 
-	def isTraversableAgain: Boolean = ???
-	def map[B](f: org.openrdf.model.Statement => B): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[B] = ???
-	def mkString(start: String,sep: String,end: String): String = ???
-	def mkString(sep: String): String = ???
-	def mkString: String = ???
+  /** Tests whether this mutable set can be repeatedly traversed. */
+	def isTraversableAgain: Boolean = true
+
+  /** [use case] Builds a new collection by applying a function to all elements of this mutable set. */
+	def map[B](f: Statement => B) = {
+    val resultSet = new UnorderedSequentialHashSet[B]()
+    iterator.map(f).foreach{b: B => resultSet.add(_)}
+    resultSet
+  }
+
 	def nonEmpty: Boolean = ???
 	def partition(p: org.openrdf.model.Statement => Boolean): (org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement], org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement]) = ???
 	def reduce[A1 >: org.openrdf.model.Statement](op: (A1, A1) => A1): A1 = ???
@@ -228,6 +231,9 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 
   /** The size of this triple set. */
   override def longSize = defaultConnection.size(contexts:_*)
+
+  /** [use case] Builds a new collection by applying a function to all elements of this mutable set. */
+  def mapToSet[B](f: (Statement) => B) = map(f)
 
   def sparqlAsk(query: String) = SesameTripleSet.sparqlAsk(query)(defaultConnection)
 

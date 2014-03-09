@@ -296,4 +296,23 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(count == 1, s"unexpected element group count (count != 1 for grouped(4)): count = $count")
   }
 
+  it should "be possible to create a string with all of the elements" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val start = "{{{ "
+    val sep = " ;;; "
+    val end = " }}}"
+    val stringValue = newSet.mkString(start, sep, end)
+    val q = "\""
+    assert(stringValue.startsWith(start), s"string value did not start with 'start' string (${q}$start${q}): $stringValue")
+    assert(stringValue.endsWith(end), s"string value did not end with 'end' string (${q}$end${q}): $stringValue")
+    assert(stringValue.contains(elem1.toString), s"string value did not contain 'elem1' string (${q}${q}${q}$elem1${q}${q}${q}): $stringValue")
+    assert(stringValue.contains(elem2.toString), s"string value did not contain 'elem2' string (${q}${q}${q}$elem2${q}${q}${q}): $stringValue")
+    assert(stringValue.contains(elem3.toString), s"string value did not contain 'elem3' string (${q}${q}${q}$elem3${q}${q}${q}): $stringValue")
+    assert(stringValue.split(sep).size == 3, s"string did not split on the 'sep' string (${q}$sep${q}) into the correct number of elements (3): $stringValue")
+  }
+
 }

@@ -97,13 +97,22 @@ import scala.collection.mutable.Buffer
 	def add(elem: A): Boolean 
   
 	/** Appends all elements of this mutable set to a string builder. */
-	def addString(b: scala.StringBuilder): scala.StringBuilder 
+	def addString(b: scala.StringBuilder): scala.StringBuilder = addString(b, " ")
   
 	/** Appends all elements of this mutable set to a string builder using a separator string. */
-	def addString(b: scala.StringBuilder, sep: String): scala.StringBuilder 
+	def addString(b: scala.StringBuilder, sep: String): scala.StringBuilder = addString(b, "", sep, "")
   
 	/** Appends all elements of this mutable set to a string builder using start, end, and separator strings. */
-	def addString(b: scala.StringBuilder, start: String, sep: String, end: String): scala.StringBuilder 
+	def addString(b: scala.StringBuilder, start: String, sep: String, end: String): scala.StringBuilder = {
+    b.append(start)
+    val elemIter = iterator
+    while (elemIter.hasNext) {
+      b.append(elemIter.next)
+      if (elemIter.hasNext) b.append(sep)
+    }
+    b.append(end)
+    b
+  }
   
 	/** Aggregates the results of applying an operator to subsequent elements. */
 	def aggregate[B](z: B)(seqop: (B, A) => B, combop: (B, B) => B): B 
@@ -218,9 +227,6 @@ import scala.collection.mutable.Buffer
 	/** Tests whether this mutable set is known to have a finite size. */
 	def hasDefiniteSize: Boolean 
   
-	/** The hashCode method for reference types. */
-	def hashCode(): Int 
-  
 	/** Selects the first element of this mutable set. */
 	// def head: A 
   
@@ -273,13 +279,13 @@ import scala.collection.mutable.Buffer
 	// def minBy[B](f: (A) => B)(implicit cmp: Ordering[B]): A 
   
 	/** Displays all elements of this mutable set in a string. */
-	def mkString: String 
+	def mkString: String = mkString(" ")
   
 	/** Displays all elements of this mutable set in a string using a separator string. */
-	def mkString(sep: String): String 
+	def mkString(sep: String): String = mkString("", sep, "")
   
 	/** Displays all elements of this mutable set in a string using start, end, and separator strings. */
-	def mkString(start: String, sep: String, end: String): String 
+	def mkString(start: String, sep: String, end: String): String = addString(new StringBuilder(), start, sep, end).toString
   
 	/** Tests whether the mutable set is not empty. */
 	def nonEmpty: Boolean 
@@ -490,6 +496,9 @@ import scala.collection.mutable.Buffer
 
  	/** The size of this mutable set. */
 	def longSize: Long = size.toLong
+
+  /** [use case] Builds a new collection by applying a function to all elements of this mutable set. */
+  def mapToSet[B](f: (A) => B): Set[B]
 
 }
 
