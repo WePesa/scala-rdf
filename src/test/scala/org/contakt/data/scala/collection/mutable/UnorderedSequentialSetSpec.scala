@@ -124,15 +124,17 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(newSet2.size == 0, s"new set 2 was not empty as expected (size != 0 after finishing): size = ${newSet2.size}")
   }
 
-  it should "ignore if you try to remove a element when it is empty" in {
+  it should "ignore it if you try to remove a element when it is empty" in {
     val newSet = empty
     val elem = newElem1
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 before starting): size = ${newSet.size}")
     newSet -= elem
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 after finishing): size = ${newSet.size}")
+    val removed = newSet.remove(elem)
+    assert(!removed && (newSet.size == 0), s"new set was not empty as expected (remove succeeded or size != 0 after finishing): removed = $removed, size = ${newSet.size}")
   }
 
-  it should "ignore if you try to remove a element that is not in it" in {
+  it should "ignore it if you try to remove a element that is not in it" in {
     val newSet = empty
     val elem1 = newElem1
     val elem2 = newElem2
@@ -141,6 +143,10 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(newSet.size == 1, s"new set did not contain 1 element as expected (size != 1 after +=): size = ${newSet.size}")
     newSet -= elem2
     assert(newSet.size == 1, s"new set did not contain 1 element as expected (size != 0 after -=): size = ${newSet.size}")
+    val removed2 = newSet.remove(elem2)
+    assert(!removed2 && (newSet.size == 1), s"new set did not contain 1 element as expected (remove succeeded or size != 1): removed #2 = $removed2, size = ${newSet.size}")
+    val removed1 = newSet.remove(elem1)
+    assert(removed1 && (newSet.size == 0), s"new set was not empty as expected (remove failed or size != 0): removed #1 = $removed1, size = ${newSet.size}")
   }
 
   it should "allow clearing the elements" in {

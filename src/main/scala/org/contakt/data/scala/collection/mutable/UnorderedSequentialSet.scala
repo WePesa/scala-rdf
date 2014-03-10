@@ -305,22 +305,22 @@ import scala.collection.mutable.Buffer
 	// def product: A 
   
 	/** Reduces the elements of this mutable set using the specified associative binary operator. */
-	def reduce[A1 >: A](op: (A1, A1) => A1): A1 
+	// def reduce[A1 >: A](op: (A1, A1) => A1): A1 
   
 	/** Applies a binary operator to all elements of this mutable set. */
-	def reduceLeft[B >: A](op: (B, A) => B): B 
+	// def reduceLeft[B >: A](op: (B, A) => B): B 
   
 	/** Optionally applies a binary operator to all elements of this mutable set. */
-	def reduceLeftOption[B >: A](op: (B, A) => B): Option[B] 
+	// def reduceLeftOption[B >: A](op: (B, A) => B): Option[B] 
   
 	/** Reduces the elements of this mutable set, if any, using the specified associative binary operator. */
-	def reduceOption[A1 >: A](op: (A1, A1) => A1): Option[A1] 
+	// def reduceOption[A1 >: A](op: (A1, A1) => A1): Option[A1] 
   
 	/** Applies a binary operator to all elements of this mutable set. */
-	def reduceRight[B >: A](op: (A, B) => B): B 
+	// def reduceRight[B >: A](op: (A, B) => B): B 
   
 	/** Optionally applies a binary operator to all elements of this mutable set. */
-	def reduceRightOption[B >: A](op: (A, B) => B): Option[B] 
+	// def reduceRightOption[B >: A](op: (A, B) => B): Option[B] 
   
 	/** Removes an element from this set. */
 	def remove(elem: A): Boolean 

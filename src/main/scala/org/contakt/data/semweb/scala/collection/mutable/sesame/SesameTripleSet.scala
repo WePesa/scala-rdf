@@ -211,13 +211,21 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
     (partition1, partition2)
   }
 
-	def reduce[A1 >: org.openrdf.model.Statement](op: (A1, A1) => A1): A1 = ???
-	def reduceLeft[B >: org.openrdf.model.Statement](op: (B, org.openrdf.model.Statement) => B): B = ???
-	def reduceLeftOption[B >: org.openrdf.model.Statement](op: (B, org.openrdf.model.Statement) => B): Option[B] = ???
-	def reduceOption[A1 >: org.openrdf.model.Statement](op: (A1, A1) => A1): Option[A1] = ???
-	def reduceRight[B >: org.openrdf.model.Statement](op: (org.openrdf.model.Statement, B) => B): B = ???
-	def reduceRightOption[B >: org.openrdf.model.Statement](op: (org.openrdf.model.Statement, B) => B): Option[B] = ???
-	def remove(elem: org.openrdf.model.Statement): Boolean = ???
+	/**
+	 * Removes an element from this set.
+	 *
+	 * @param elem The element to be removed.
+	 * @return true if the element was previously present in the set, false otherwise.
+	 */
+	def remove(stmt: Statement) = {
+		if (contains(stmt)) {
+      defaultConnection.remove(stmt)
+      true
+		} else {
+      false
+		}
+	}
+
 	def retain(p: org.openrdf.model.Statement => Boolean): Unit = ???
 
   /** The size of this triple set. */

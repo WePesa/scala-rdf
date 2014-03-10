@@ -51,6 +51,8 @@ class UnorderedSequentialHashSet[A] extends HashSet[A] with UnorderedSequentialS
   override def mkString(sep: String) = super.mkString(sep)
   override def mkString(start: String, sep: String, end: String) = super.mkString(start, sep, end)
 
+  override def nonEmpty = super.nonEmpty
+
 	override def partition(p: (A) => Boolean) = {
 		val result = super.partition(p)
 		(
