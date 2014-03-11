@@ -1,6 +1,7 @@
 package org.contakt.data.scala.collection.mutable
 
-import scala.collection.mutable.HashSet
+import scala.collection.mutable.{Buffer,HashSet}
+import scala.reflect.ClassTag
 import org.scalatest._
 import org.scalatest.matchers._
 import org.openrdf.model.impl.StatementImpl
@@ -11,7 +12,7 @@ import org.openrdf.model.impl.StatementImpl
  * 'T' is the element type of the Traversable implementation,
  * and 'TSet' is the class implementing 'UnorderedSequentialSet[T]' that should be used.
  */
-abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] extends FlatSpec with BeforeAndAfter with ShouldMatchers with UnorderedSequentialSetSpecSetup[T, TSet] {
+abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequentialSet[T]] extends FlatSpec with BeforeAndAfter with ShouldMatchers with UnorderedSequentialSetSpecSetup[T, TSet] {
 
   before {
     beforeSetup()
@@ -333,6 +334,63 @@ abstract class UnorderedSequentialSetSpec[T, TSet <: UnorderedSequentialSet[T]] 
     assert(partition1.size < newSet.size, "partition 1 not smaller than new set as expected: size = ${partition1.size}")
     assert(partition2.size < newSet.size, "partition 2 not smaller than new set as expected: size = ${partition2.size}")
     assert(partition1.size + partition2.size == newSet.size, "partitions did not add up to original new set: sum = ${partition1.size + partition2.size}")
+  }
+
+  it should "be able to remove all elements that don't match a predicate" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    assert(newSet.size == 3, "new set was smaller than expected (size != 3): size = ${newSet.size}")   
+    newSet.retain{_ == elem1}
+    assert(newSet.size == 1, "new set was not the expected size (size != 1): size = ${newSet.size}")   
+  }
+
+  it should "be possible to create an array of the elements" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val newArray: Array[T] = newSet.toArray
+    assert(newArray.size == newSet.size, "new array was not the same size as new set: newSet.size = ${newSet.size}, newArray.size = ${newArray.size}")
+  }
+
+  it should "be possible to create a buffer of the elements" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val newBuffer: Buffer[T] = newSet.toBuffer
+    assert(newBuffer.size == newSet.size, "new buffer was not the same size as new set: newSet.size = ${newSet.size}, newBuffer.size = ${newBuffer.size}")
+  }
+
+  it should "be possible to create an indexed sequence of the elements" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val newSeq: IndexedSeq[T] = newSet.toIndexedSeq
+    assert(newSeq.size == newSet.size, "new sequence was not the same size as new set: newSet.size = ${newSet.size}, newSeq.size = ${newSeq.size}")
+  }
+
+  it should "be possible to create an iterable or iterator for the elements" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val newIterable: Iterable[T] = newSet.toIterable
+    var count1 = 0
+    for (elem <- newIterable.iterator) count1 += 1
+    assert(count1 == newSet.size, s"new iterable did not have the same number of elements as new set (size != 3): size = $count1")
+    val newIterator: Iterator[T] = newSet.toIterator
+    var count2 = 0
+    for (elem <- newIterator) count2 += 1
+    assert(count2 == newSet.size, s"new iterator did not have the same number of elements as new set (size != 3): size = $count2")
   }
 
 }

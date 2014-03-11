@@ -1,6 +1,10 @@
 package org.contakt.data.semweb.scala.collection.mutable.sesame
 
+import scala.collection.Set
+import scala.collection.immutable
+import scala.collection.mutable.Buffer
 import scala.collection.JavaConversions._
+import scala.reflect.ClassTag
 import scala.util.Try
 import org.openrdf.model.{Resource, Statement}
 import org.openrdf.query.{BindingSet, QueryLanguage}
@@ -9,7 +13,6 @@ import org.openrdf.repository.sail.SailRepository
 import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer
 import org.openrdf.sail.memory.MemoryStore
 import org.contakt.data.scala.collection.mutable.{UnorderedSequentialHashSet, GroupIterator, UnorderedSequentialSet}
-import scala.collection.Set
 
 /**
  * Sesame implementation of an RDF triple store as
@@ -188,10 +191,10 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
   /** Tests if this triple set is empty. */
 	def isEmpty = (longSize == 0)
 
-  /** Tests whether this mutable set can be repeatedly traversed. */
+  /** Tests whether this triple set can be repeatedly traversed. */
 	def isTraversableAgain: Boolean = true
 
-  /** [use case] Builds a new collection by applying a function to all elements of this mutable set. */
+  /** [use case] Builds a new collection by applying a function to all elements of this triple set. */
 	def map[B](f: Statement => B) = {
     val resultSet = new UnorderedSequentialHashSet[B]()
     iterator.map(f).foreach{b: B => resultSet.add(_)}
@@ -199,7 +202,7 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
   }
 
   /**
-   * Partitions this mutable set into two triple sets according to a predicate.
+   * Partitions this triple set into two triple sets according to a predicate.
    *
    * @param p the predicate on which to partition.
    * @return a pair of sets: the first set consists of all elements that satisfy the predicate p and the second set consists of all elements that don't. The relative order of the elements in the resulting sets is the same as in the original set.
@@ -212,7 +215,7 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
   }
 
 	/**
-	 * Removes an element from this set.
+	 * Removes an element from this triple set.
 	 *
 	 * @param elem The element to be removed.
 	 * @return true if the element was previously present in the set, false otherwise.
@@ -226,22 +229,38 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 		}
 	}
 
-	def retain(p: org.openrdf.model.Statement => Boolean): Unit = ???
+	/** Removes all elements from the triple set for which do not satisfy a predicate. */
+	def retain(p: Statement => Boolean) = {
+		iterator.foreach{stmt => if (!p(stmt)) defaultConnection.remove(stmt)}
+	}
 
   /** The size of this triple set. */
   def size = longSize.toInt
 
-	def span(p: org.openrdf.model.Statement => Boolean): (org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement], org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement]) = ???
-	def stringPrefix: String = ???
-	def toBuffer[A1 >: org.openrdf.model.Statement]: scala.collection.mutable.Buffer[A1] = ???
-	def toIndexedSeq: scala.collection.immutable.IndexedSeq[org.openrdf.model.Statement] = ???
-	def toIterable: Iterable[org.openrdf.model.Statement] = ???
-	def toIterator: Iterator[org.openrdf.model.Statement] = ???
+	/** [use case] Converts this triple set to an array. */
+	def toArray[B >: Statement](implicit arg0: ClassTag[B]) = iterator.toArray[B]
+
+	/** Converts this triple set to a triple buffer. */
+	def toBuffer[A1 >: Statement] = iterator.toBuffer[A1]
+
+  /** Converts this triple set to an indexed sequence. */
+	def toIndexedSeq: immutable.IndexedSeq[Statement] = iterator.toIndexedSeq
+
+  /** Converts this triple set to an iterable collection. */
+	def toIterable: Iterable[Statement] = iterator.toIterable
+
+  /** Returns an Iterator over the elements in this triple set. */
+	def toIterator: Iterator[Statement] = iterator
+
 	def toList: List[org.openrdf.model.Statement] = ???
 	def toSeq: Seq[org.openrdf.model.Statement] = ???
 	def toSet[B >: org.openrdf.model.Statement]: scala.collection.immutable.Set[B] = ???
 	def toStream: scala.collection.immutable.Stream[org.openrdf.model.Statement] = ???
-	def toTraversable: Traversable[org.openrdf.model.Statement] = ???
+
+  /** Creates a multi-line String representation of this triple set. */
+  override def toString = mkString(stringPrefix + "{\n", ",\n", "}")
+
+  def toTraversable: Traversable[org.openrdf.model.Statement] = ???
 	def toVector: Vector[org.openrdf.model.Statement] = ???
 	def update(elem: org.openrdf.model.Statement,included: Boolean): Unit = ???
 

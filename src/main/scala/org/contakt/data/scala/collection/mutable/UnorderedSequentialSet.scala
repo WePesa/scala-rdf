@@ -2,6 +2,7 @@ package org.contakt.data.scala.collection.mutable
 
 import scala.collection._
 import scala.collection.mutable.Buffer
+import scala.reflect.ClassTag
 
 /**
  * Scala trait for sets that do not guarantee
@@ -322,7 +323,12 @@ import scala.collection.mutable.Buffer
 	/** Optionally applies a binary operator to all elements of this mutable set. */
 	// def reduceRightOption[B >: A](op: (A, B) => B): Option[B] 
   
-	/** Removes an element from this set. */
+	/**
+	 * Removes an element from this set.
+	 *
+	 * @param elem The element to be removed.
+	 * @return true if the element was previously present in the set, false otherwise.
+	 */
 	def remove(elem: A): Boolean 
   
 	/** The collection of type mutable set underlying this TraversableLike object. */
@@ -332,7 +338,7 @@ import scala.collection.mutable.Buffer
 	// def result(): Set[A] 
   
 	/** Removes all elements from the set for which do not satisfy a predicate. */
-	def retain(p: (A) => Boolean): Unit 
+	def retain(p: (A) => Boolean): Unit
   
 	/** [use case] Checks if the other iterable collection contains the same elements in the same order as this mutable set. */
 	// def sameElements(that: GenIterable[A]): Boolean 
@@ -374,13 +380,13 @@ import scala.collection.mutable.Buffer
 	// def sliding(size: Int): Iterator[Set[A]] 
   
 	/** Splits this mutable set into a prefix/suffix pair according to a predicate. */
-	def span(p: (A) => Boolean): (UnorderedSequentialSet[A], UnorderedSequentialSet[A]) 
+	// def span(p: (A) => Boolean): (UnorderedSequentialSet[A], UnorderedSequentialSet[A]) 
   
 	/** Splits this mutable set into two at a given position. */
 	// def splitAt(n: Int): (Set[A], Set[A]) 
   
 	/** Defines the prefix of this object's toString representation. */
-	def stringPrefix: String 
+	def stringPrefix: String = ""
   
 	/** Tests whether this set is a subset of another set. */
 	// def subsetOf(that: GenSet[A]): Boolean 
@@ -413,8 +419,8 @@ import scala.collection.mutable.Buffer
 	// def to[Col[_]]: Col[A] 
   
 	/** [use case] Converts this mutable set to an array. */
-	// def toArray: Array[A] 
-  
+	def  toArray[B >: A](implicit arg0: ClassTag[B]): Array[B]
+	   
 	/** Converts this mutable set to a mutable buffer. */
 	def toBuffer[A1 >: A]: Buffer[A1] 
   

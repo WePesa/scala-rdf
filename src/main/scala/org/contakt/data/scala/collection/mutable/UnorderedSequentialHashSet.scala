@@ -68,7 +68,9 @@ class UnorderedSequentialHashSet[A] extends HashSet[A] with UnorderedSequentialS
 			UnorderedSequentialHashSet.hashSetToUnorderedSequentialHashSet(result._2)
 		)
 	}
-	
+
+	override def stringPrefix = super.stringPrefix
+
 }
 
 object UnorderedSequentialHashSet {
