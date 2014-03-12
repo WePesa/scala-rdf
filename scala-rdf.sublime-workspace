@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"Class",
+				"ClassTag"
+			],
+			[
+				"st",
+				"stringPrefix"
+			],
+			[
 				"iter",
 				"iterator"
 			],
@@ -71,33 +79,6 @@
 	},
 	"buffers":
 	[
-		{
-			"contents": "package org.contakt.data.scala.collection.mutable\n\nimport scala.collection._\nimport scala.collection.mutable.Buffer\n\n/**\n * Scala trait for sets that do not guarantee\n * to return results in a repeatable order,\n * and do guarantee to provide support for parallel operations.\n * Implementations may be based on databases, so assumptions\n * should be avoided around the size of result sets, and around\n * whether operations can be done by storing all intermediate data\n * in-memory (or not).\n * This method signature is intended to be a subset\n * of Scala's 'mutable.Set' method signature.\n */\n\n trait UnorderedSequentialSet[A] {\n\n 	// **** Set[A] methods\n\n	/** Adds a single element to the set. */\n	def +=(elem: A): UnorderedSequentialSet[A] \n  \n	/** Removes a single element from this mutable set. */\n	def -=(elem: A): UnorderedSequentialSet[A] \n  \n	/** Tests if some element is contained in this set. */\n	def contains(elem: A): Boolean \n  \n	def iterator: Iterator[A] \n\n	/** Computes the intersection between this set and another set. */\n	// def &(that: GenSet[A]): Set[A] \n\n	/** The difference of this set and another set. */\n	// def &~(that: GenSet[A]): Set[A] \n  \n	/** Creates a new set consisting of all the elements of this set and two or more specified elements. */\n	def +(elem1: A, elem2: A, elems: A*): UnorderedSequentialSet[A] \n  \n	/** Creates a new set consisting of all the elements of this set and elem. */\n	def +(elem: A): UnorderedSequentialSet[A] \n  \n	/** Creates a new set consisting of all the elements of this set and those provided by the specified traversable object. */\n	// def ++(xs: GenTraversableOnce[A]): Set[A] \n  \n	/** [use case] Returns a new mutable set containing the elements from the left hand operand followed by the elements from the right hand operand. */\n	// def ++[B](that: GenTraversableOnce[B]): Set[B] \n  \n	/** As with ++, returns a new collection containing the elements from the left operand followed by the elements from the right operand. */\n	// def ++:[B >: A, That](that: collection.Traversable[B])(implicit bf: CanBuildFrom[Set[A], B, That]): That \n  \n	/** [use case] As with ++, returns a new collection containing the elements from the left operand followed by the elements from the right operand. */\n	// def ++:[B](that: TraversableOnce[B]): Set[B] \n  \n	/** adds all elements produced by a TraversableOnce to this mutable set. */\n	// def ++=(xs: TraversableOnce[A]): Set.this.type \n  \n	/** adds two or more elements to this mutable set. */\n	def +=(elem1: A, elem2: A, elems: A*): UnorderedSequentialSet[A] \n  \n	/** Creates a new set consisting of all the elements of this set except the two or more specified elements. */\n	def -(elem1: A, elem2: A, elems: A*): UnorderedSequentialSet[A] \n  \n	/** Creates a new set consisting of all the elements of this set except elem. */\n	def -(elem: A): UnorderedSequentialSet[A] \n  \n	/** Creates a new set consisting of all the elements of this set except those provided by the specified traversable object. */\n	// def --(xs: GenTraversableOnce[A]): Set[A] \n  \n	/** Removes all elements produced by an iterator from this mutable set. */\n	// def --=(xs: TraversableOnce[A]): Set.this.type \n  \n	/** Removes two or more elements from this mutable set. */\n	def -=(elem1: A, elem2: A, elems: A*): UnorderedSequentialSet[A] \n  \n	/** Applies a binary operator to a start value and all elements of this mutable set. */\n	def /:[B](z: B)(op: (B, A) => B): B \n  \n	/** Applies a binary operator to all elements of this mutable set and a start value. */\n	def :\\[B](z: B)(op: (A, B) => B): B \n  \n	/** Send a message to this scriptable object. */\n	// def <<(cmd: Message[A]): Unit \n  \n	/**\n	 * Adds an element to this mutable set.\n	 *\n	 * @param elem the element to be added\n	 * @return true if the element was not yet present in the set, false otherwise.\n	 */\n	def add(elem: A): Boolean \n  \n	/** Appends all elements of this mutable set to a string builder. */\n	def addString(b: scala.StringBuilder): scala.StringBuilder \n  \n	/** Appends all elements of this mutable set to a string builder using a separator string. */\n	def addString(b: scala.StringBuilder, sep: String): scala.StringBuilder \n  \n	/** Appends all elements of this mutable set to a string builder using start, end, and separator strings. */\n	def addString(b: scala.StringBuilder, start: String, sep: String, end: String): scala.StringBuilder \n  \n	/** Aggregates the results of applying an operator to subsequent elements. */\n	def aggregate[B](z: B)(seqop: (B, A) => B, combop: (B, B) => B): B \n  \n	/** Composes two instances of Function1 in a new Function1, with this function applied first. */\n	// def andThen[A](g: (Boolean) => A): (A) => A \n  \n	/** Tests if some element is contained in this set. */\n	def apply(elem: A): Boolean = contains(elem)\n  \n	// def asParIterable: ParIterable[A] \n  \n	// def asParSeq: ParSeq[A] \n  \n	/** Method called from equality methods, so that user-defined subclasses can refuse to be equal to other collections of the same kind. */\n	def canEqual(that: Any) = {\n		that match {\n			case uss: UnorderedSequentialSet[A] => true\n			case _ => false\n		}\n	}\n  \n	/** Removes all elements from the set. */\n	def clear(): Unit \n  \n	/** [use case] Builds a new collection by applying a partial function to all elements of this mutable set on which the function is defined. */\n	def collect[B](pf: PartialFunction[A, B]): UnorderedSequentialSet[B] \n  \n	/** Finds the first element of the mutable set for which the given partial function is defined, and applies the partial function to it. */\n	def collectFirst[B](pf: PartialFunction[A, B]): Option[B] \n  \n	/** The factory companion object that builds instances of class mutable.Set. */\n	// def companion: GenericCompanion[Set] \n  \n	/** Composes two instances of Function1 in a new Function1, with this function applied last. */\n	// def compose[A](g: (A) => A): (A) => Boolean \n  \n	/** [use case] Copies elements of this mutable set to an array. */\n	// def copyToArray(xs: Array[A], start: Int, len: Int): Unit \n  \n	/** [use case] Copies values of this mutable set to an array. */\n	// def copyToArray(xs: Array[A]): Unit \n  \n	/** [use case] Copies values of this mutable set to an array. */\n	// def copyToArray(xs: Array[A], start: Int): Unit \n  \n	/** Copies all elements of this mutable set to a buffer. */\n	def copyToBuffer[B >: A](dest: Buffer[B]): Unit \n  \n	/** Counts the number of elements in the mutable set which satisfy a predicate. */\n	def count(p: (A) => Boolean): Int \n  \n	/** Computes the difference of this set and another set. */\n	// def diff(that: GenSet[A]): Set[A] \n  \n	/** Selects all elements except first n ones. */\n	// def drop(n: Int): Set[A] \n  \n	/** Selects all elements except last n ones. */\n	// def dropRight(n: Int): Set[A] \n  \n	/** Drops longest prefix of elements that satisfy a predicate. */\n	// def dropWhile(p: (A) => Boolean): Set[A] \n  \n	def empty: UnorderedSequentialSet[A]\n  \n	/** Compares this set with another object for equality. */\n	def equals(that: Any): Boolean \n  \n	/** Tests whether a predicate holds for some of the elements of this mutable set. */\n	def exists(p: (A) => Boolean): Boolean \n  \n	/** Selects all elements of this mutable set which satisfy a predicate. */\n	def filter(p: (A) => Boolean): UnorderedSequentialSet[A]\n  \n	/** Selects all elements of this mutable set which do not satisfy a predicate. */\n	def filterNot(p: (A) => Boolean): UnorderedSequentialSet[A]\n  \n	/** Finds an element of the mutable set satisfying a predicate, if any. */\n	def find(p: (A) => Boolean): Option[A] \n  \n	/** [use case] Builds a new collection by applying a function to all elements of this mutable set and using the elements of the resulting collections. */\n	// def flatMap[B](f: (A) => GenTraversableOnce[B]): Set[B] \n  \n	/** [use case] Converts this mutable set of traversable collections into a mutable set formed by the elements of these traversable collections. */\n	// def flatten[B]: UnorderedSequentialSet[B]\n  \n	/** Folds the elements of this mutable set using the specified associative binary operator. */\n	def fold[A1 >: A](z: A1)(op: (A1, A1) => A1): A1 \n  \n	/** Applies a binary operator to a start value and all elements of this mutable set. */\n	def foldLeft[B](z: B)(op: (B, A) => B): B \n  \n	/** Applies a binary operator to all elements of this mutable set and a start value. */\n	def foldRight[B](z: B)(op: (A, B) => B): B \n  \n	/** Tests whether a predicate holds for all elements of this mutable set. */\n	def forall(p: (A) => Boolean): Boolean \n  \n	/** [use case] Applies a function f to all elements of this mutable set. */\n	def foreach[B](f: (A) => B): Unit \n  \n	/** The generic builder that builds instances of mutable.Set at arbitrary element types. */\n	// def genericBuilder[B]: Builder[B, Set[B]] \n  \n	/** Partitions this mutable set into a map of mutable sets according to some discriminator function. */\n	// def groupBy[K](f: (A) => K): immutable.Map[K, UnorderedSequentialSet[A]] \n  \n	/** Partitions elements in fixed size mutable sets. */\n	def grouped(size: Int): Iterator[UnorderedSequentialSet[A]] \n  \n	/** Tests whether this mutable set is known to have a finite size. */\n	def hasDefiniteSize: Boolean \n  \n	/** The hashCode method for reference types. */\n	def hashCode(): Int \n  \n	/** Selects the first element of this mutable set. */\n	// def head: A \n  \n	/** Optionally selects the first element. */\n	// def headOption: Option[A] \n  \n	// def ifParSeq[R](isbody: (ParSeq[A]) => R): (TraversableOps[A])#Otherwise[R] \n  \n	/** Selects all elements except the last. */\n	// def init: Set[A] \n  \n	/** Iterates over the inits of this mutable set. */\n	// def inits: Iterator[Set[A]] \n  \n	/** Computes the intersection between this set and another set. */\n	// def intersect(that: GenSet[A]): Set[A] \n  \n	/** Tests if this set is empty. */\n	def isEmpty: Boolean \n  \n	def isParIterable = false \n  \n	def isParSeq = false \n  \n	def isParallel = false\n  \n	/** Tests whether this mutable set can be repeatedly traversed. */\n	def isTraversableAgain: Boolean \n  \n	/** Selects the last element. */\n	// def last: A \n  \n	/** Optionally selects the last element. */\n	// def lastOption: Option[A] \n  \n	/** [use case] Builds a new collection by applying a function to all elements of this mutable set. */\n	def map[B](f: (A) => B): UnorderedSequentialSet[B]\n  \n	/** Creates a new builder by applying a transformation function to the results of this builder. */\n	//  mapResult[NewTo](f: (Set[A]) => NewTo): Builder[A, NewTo] \n  \n	/** [use case] Finds the largest element. */\n	// def max: A \n  \n	// def maxBy[B](f: (A) => B)(implicit cmp: Ordering[B]): A \n  \n	/** [use case] Finds the smallest element. */\n	// def min: A \n  \n	// def minBy[B](f: (A) => B)(implicit cmp: Ordering[B]): A \n  \n	/** Displays all elements of this mutable set in a string. */\n	def mkString: String \n  \n	/** Displays all elements of this mutable set in a string using a separator string. */\n	def mkString(sep: String): String \n  \n	/** Displays all elements of this mutable set in a string using start, end, and separator strings. */\n	def mkString(start: String, sep: String, end: String): String \n  \n	/** Tests whether the mutable set is not empty. */\n	def nonEmpty: Boolean \n  \n	/** Returns a parallel implementation of this collection. */\n	// def par: ParSet[A] \n  \n	/** Partitions this mutable set in two mutable sets according to a predicate. */\n	def partition(p: (A) => Boolean): (UnorderedSequentialSet[A], UnorderedSequentialSet[A]) \n  \n	/** [use case] Multiplies up the elements of this collection. */\n	// def product: A \n  \n	/** Reduces the elements of this mutable set using the specified associative binary operator. */\n	def reduce[A1 >: A](op: (A1, A1) => A1): A1 \n  \n	/** Applies a binary operator to all elements of this mutable set. */\n	def reduceLeft[B >: A](op: (B, A) => B): B \n  \n	/** Optionally applies a binary operator to all elements of this mutable set. */\n	def reduceLeftOption[B >: A](op: (B, A) => B): Option[B] \n  \n	/** Reduces the elements of this mutable set, if any, using the specified associative binary operator. */\n	def reduceOption[A1 >: A](op: (A1, A1) => A1): Option[A1] \n  \n	/** Applies a binary operator to all elements of this mutable set. */\n	def reduceRight[B >: A](op: (A, B) => B): B \n  \n	/** Optionally applies a binary operator to all elements of this mutable set. */\n	def reduceRightOption[B >: A](op: (A, B) => B): Option[B] \n  \n	/** Removes an element from this set. */\n	def remove(elem: A): Boolean \n  \n	/** The collection of type mutable set underlying this TraversableLike object. */\n	// def repr: Set[A] \n  \n	/** The result when this set is used as a builder */\n	// def result(): Set[A] \n  \n	/** Removes all elements from the set for which do not satisfy a predicate. */\n	def retain(p: (A) => Boolean): Unit \n  \n	/** [use case] Checks if the other iterable collection contains the same elements in the same order as this mutable set. */\n	// def sameElements(that: GenIterable[A]): Boolean \n  \n	/** Computes a prefix scan of the elements of the collection. */\n	// def scan[B >: A, That](z: B)(op: (B, B) => B)(implicit cbf: CanBuildFrom[Set[A], B, That]): That \n  \n	/** Produces a collection containing cumulative results of applying the operator going left to right. */\n	// def scanLeft[B, That](z: B)(op: (B, A) => B)(implicit bf: CanBuildFrom[Set[A], B, That]): That \n  \n	/** Produces a collection containing cumulative results of applying the operator going right to left. */\n	// def scanRight[B, That](z: B)(op: (A, B) => B)(implicit bf: CanBuildFrom[Set[A], B, That]): That \n  \n	/** A version of this collection with all of the operations implemented sequentially. */\n	// def seq: Set[A] \n  \n	/** The size of this mutable set. */\n	def size: Int \n  \n	/** Gives a hint that one expects the result of this builder to have the same size as the given collection, plus some delta. */\n	// def sizeHint(coll: TraversableLike[_, _], delta: Int): Unit \n  \n	/** Gives a hint that one expects the result of this builder to have the same size as the given collection, plus some delta. */\n	// def sizeHint(coll: TraversableLike[_, _]): Unit \n  \n	/** Gives a hint how many elements are expected to be added when the next result is called. */\n	// def sizeHint(size: Int): Unit \n  \n	/** Gives a hint how many elements are expected to be added when the next result is called, together with an upper bound given by the size of some other collection. */\n	// def sizeHintBounded(size: Int, boundingColl: TraversableLike[_, _]): Unit \n  \n	/** Selects an interval of elements. */\n	// def slice(from: Int, until: Int): Set[A] \n  \n	/** Groups elements in fixed size blocks by passing a \"sliding window\" over them (as opposed to partitioning them, as is done in grouped. */\n	// def sliding(size: Int, step: Int): Iterator[Set[A]] \n  \n	/** Groups elements in fixed size blocks by passing a \"sliding window\" over them (as opposed to partitioning them, as is done in grouped. */\n	// def sliding(size: Int): Iterator[Set[A]] \n  \n	/** Splits this mutable set into a prefix/suffix pair according to a predicate. */\n	def span(p: (A) => Boolean): (UnorderedSequentialSet[A], UnorderedSequentialSet[A]) \n  \n	/** Splits this mutable set into two at a given position. */\n	// def splitAt(n: Int): (Set[A], Set[A]) \n  \n	/** Defines the prefix of this object's toString representation. */\n	def stringPrefix: String \n  \n	/** Tests whether this set is a subset of another set. */\n	// def subsetOf(that: GenSet[A]): Boolean \n  \n	/** An iterator over all subsets of this set. */\n	// def subsets: Iterator[Set[A]] \n  \n	/** An iterator over all subsets of this set of the given size. */\n	// def subsets(len: Int): Iterator[Set[A]] \n  \n	/** [use case] Sums up the elements of this collection. */\n	// def sum: A \n  \n	/** Selects all elements except the first. */\n	// def tail: Set[A] \n  \n	/** Iterates over the tails of this mutable set. */\n	// def tails: Iterator[Set[A]] \n  \n	/** Selects first n elements. */\n	// def take(n: Int): Set[A] \n  \n	/** Selects last n elements. */\n	// def takeRight(n: Int): Set[A] \n  \n	/** Takes longest prefix of elements that satisfy a predicate. */\n	// def takeWhile(p: (A) => Boolean): Set[A] \n  \n	/** [use case] Converts this mutable set into another by copying all elements. */\n	// def to[Col[_]]: Col[A] \n  \n	/** [use case] Converts this mutable set to an array. */\n	// def toArray: Array[A] \n  \n	/** Converts this mutable set to a mutable buffer. */\n	def toBuffer[A1 >: A]: Buffer[A1] \n  \n	/** Converts this mutable set to an indexed sequence. */\n	def toIndexedSeq: immutable.IndexedSeq[A] \n  \n	/** Converts this mutable set to an iterable collection. */\n	def toIterable: collection.Iterable[A] \n  \n	/** Returns an Iterator over the elements in this mutable set. */\n	def toIterator: Iterator[A] \n  \n	/** Converts this mutable set to a list. */\n	def toList: List[A] \n  \n	/** [use case] Converts this mutable set to a map. */\n	// def toMap[T, U]: collection.Map[T, U] \n  \n	// def toParArray: ParArray[A] \n  \n	/** Converts this mutable set to a sequence. */\n	def toSeq: collection.Seq[A] \n  \n	/** Converts this mutable set to a set. */\n	def toSet[B >: A]: immutable.Set[B] \n  \n	/** Converts this mutable set to a stream. */\n	def toStream: immutable.Stream[A] \n  \n	/** Creates a String representation of this object. */\n	def toString(): String \n  \n	/** Converts this mutable set to an unspecified Traversable. */\n	def toTraversable: collection.Traversable[A] \n  \n	/** Converts this mutable set to a Vector. */\n	def toVector: Vector[A] \n  \n	/** Transposes this mutable set of traversable collections into a mutable set of mutable sets. */\n	// def transpose[B](implicit asTraversable: (A) => GenTraversableOnce[B]): Set[Set[B]] \n  \n	/** Computes the union between of set and another set. */\n	// def union(that: GenSet[A]): Set[A] \n  \n	/** Converts this mutable set of pairs into two collections of the first and second half of each pair. */\n	// def unzip[A1, A2](implicit asPair: (A) => (A1, A2)): (Set[A1], Set[A2]) \n  \n	/** Converts this mutable set of triples into three collections of the first, second, and third element of each triple. */\n	// def unzip3[A1, A2, A3](implicit asTriple: (A) => (A1, A2, A3)): (Set[A1], Set[A2], Set[A3]) \n\n	/** Updates the presence of a single element in this set. */\n	def update(elem: A, included: Boolean): Unit \n  \n	/** Creates a non-strict view of a slice of this mutable set. */\n	// def view(from: Int, until: Int): IterableView[A, Set[A]] \n  \n	/** Creates a non-strict view of this mutable set. */\n	// def view: IterableView[A, Set[A]] \n  \n	/** Creates a non-strict filter of this mutable set. */\n	// def withFilter(p: (A) => Boolean): FilterMonadic[A, Set[A]] \n  \n	/** [use case] Returns a mutable set formed from this mutable set and another iterable collection by combining corresponding elements in pairs. */\n	// def zip[B](that: GenIterable[B]): Set[(A, B)] \n  \n	/** [use case] Returns a mutable set formed from this mutable set and another iterable collection by combining corresponding elements in pairs. */\n	// def zipAll[B](that: collection.Iterable[B], thisElem: A, thatElem: B): Set[(A, B)] \n  \n	/** [use case] Zips this mutable set with its indices. */\n	// def zipWithIndex: Set[(A, Int)] \n  \n	/** Computes the union between this set and another set. */\n	// def |(that: GenSet[A]): Set[A] \n\n	// def filter(p: (A) => Boolean): TraversableOnce[A] \n  \n	// def flatMap[B](f: (A) => GenTraversableOnce[B]): TraversableOnce[B] \n  \n	// def map[B](f: (A) => B): TraversableOnce[B] \n  \n	// def withFilter(p: (A) => Boolean): Iterator[A] \n\n	// **** Other methods\n\n 	/** The size of this mutable set. */\n	def longSize: Long = size.toLong\n\n}\n",
-			"file": "src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala",
-			"file_size": 20149,
-			"file_write_time": 130374781258436744,
-			"settings":
-			{
-				"buffer_size": 19652,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
-			"settings":
-			{
-				"buffer_size": 13299,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala",
-			"settings":
-			{
-				"buffer_size": 10425,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -126,19 +107,19 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala",
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SparqlProcessorSpec.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpec.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SparqlProcessor.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SparqlProcessorSpecSetup.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpecSetup.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSet.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/StatementTestData.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/StatementUnorderedSequentialHashSetSpecSetup.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SesameTripleSetSpecSetup.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/StatementUnorderedSequentialHashSetSpec.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialHashSetSpecSetup.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/StringUnorderedSequentialHashSetSpecSetup.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/scalardf.sc",
@@ -195,6 +176,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"mutable set",
 			"contexts",
 			"\\?\\?\\? def",
 			"⇒",
@@ -207,9 +189,10 @@
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
+			"triple set",
 			"\\?\\?\\?\\n\\tdef",
 			"\\?\\?\\?\\ndef",
 			"=>",
@@ -224,96 +207,8 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 19652,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8389,
-								8467
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3378.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 13299,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6545,
-								6545
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2829.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10425,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								10353,
-								10353
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3856.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],

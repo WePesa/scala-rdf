@@ -1,6 +1,7 @@
 package org.contakt.data.scala.collection.mutable
 
 import scala.collection.mutable.{Buffer,HashSet}
+import scala.collection.immutable
 import scala.reflect.ClassTag
 import org.scalatest._
 import org.scalatest.matchers._
@@ -331,8 +332,8 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
     val elem3 = newElem3
     newSet += (elem1, elem2, elem3)
     val (partition1, partition2) = newSet.partition{_ == elem1}
-    assert(partition1.size < newSet.size, "partition 1 not smaller than new set as expected: size = ${partition1.size}")
-    assert(partition2.size < newSet.size, "partition 2 not smaller than new set as expected: size = ${partition2.size}")
+    assert(partition1.size < newSet.size, s"partition 1 not smaller than new set as expected: size = ${partition1.size}")
+    assert(partition2.size < newSet.size, s"partition 2 not smaller than new set as expected: size = ${partition2.size}")
     assert(partition1.size + partition2.size == newSet.size, "partitions did not add up to original new set: sum = ${partition1.size + partition2.size}")
   }
 
@@ -342,9 +343,9 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
     val elem2 = newElem2
     val elem3 = newElem3
     newSet += (elem1, elem2, elem3)
-    assert(newSet.size == 3, "new set was smaller than expected (size != 3): size = ${newSet.size}")   
+    assert(newSet.size == 3, s"new set was smaller than expected (size != 3): size = ${newSet.size}")   
     newSet.retain{_ == elem1}
-    assert(newSet.size == 1, "new set was not the expected size (size != 1): size = ${newSet.size}")   
+    assert(newSet.size == 1, s"new set was not the expected size (size != 1): size = ${newSet.size}")   
   }
 
   it should "be possible to create an array of the elements" in {
@@ -374,7 +375,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
     val elem3 = newElem3
     newSet += (elem1, elem2, elem3)
     val newSeq: IndexedSeq[T] = newSet.toIndexedSeq
-    assert(newSeq.size == newSet.size, "new sequence was not the same size as new set: newSet.size = ${newSet.size}, newSeq.size = ${newSeq.size}")
+    assert(newSeq.size == newSet.size, s"new sequence was not the same size as new set: newSet.size = ${newSet.size}, newSeq.size = ${newSeq.size}")
   }
 
   it should "be possible to create an iterable or iterator for the elements" in {
@@ -391,6 +392,81 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
     var count2 = 0
     for (elem <- newIterator) count2 += 1
     assert(count2 == newSet.size, s"new iterator did not have the same number of elements as new set (size != 3): size = $count2")
+  }
+
+  it should "be possible to create a list of the elements" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val newList: List[T] = newSet.toList
+    assert(newList.size == newSet.size, s"new list was not the same size as new set: newSet.size = ${newSet.size}, newList.size = ${newList.size}")
+  }
+
+  it should "be possible to create a sequence of the elements" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val newSeq: Seq[T] = newSet.toSeq
+    assert(newSeq.size == newSet.size, s"new sequence was not the same size as new set: newSet.size = ${newSet.size}, newSeq.size = ${newSeq.size}")
+  }
+
+  it should "be possible to create an immutable set of the elements" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val newImmutableSet: immutable.Set[T] = newSet.toSet
+    assert(newImmutableSet.size == newSet.size, s"new immutable set was not the same size as new set: newSet.size = ${newSet.size}, newImmutableSet.size = ${newImmutableSet.size}")
+  }
+
+  it should "be possible to create an immutable stream of the elements" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val newStream: immutable.Stream[T] = newSet.toStream
+    assert(newStream.size == newSet.size, s"new stream was not the same size as new set: newSet.size = ${newSet.size}, newStream.size = ${newStream.size}")
+  }
+
+  it should "be possible to traverse the elements" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val newTraversable: Traversable[T] = newSet.toTraversable
+    var count = 0
+    for (elem <- newTraversable) count += 1
+    assert(count == newSet.size, s"new traversable did not have the same number of elements as new set (size != 3): size = $count")
+  }
+
+  it should "be possible to create a vector of the elements" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2, elem3)
+    val newVector: Vector[T] = newSet.toVector
+    assert(newVector.size == newSet.size, s"new vector was not the same size as new set: newSet.size = ${newSet.size}, newVector.size = ${newVector.size}")
+  }
+
+  it should "be possible to add or remove an element based on a boolean value" in {
+    val newSet = empty
+    val elem1 = newElem1
+    val elem2 = newElem2
+    val elem3 = newElem3
+    newSet += (elem1, elem2)
+    assert(newSet.size == 2, s"new set was not the expected size (before, size != 2): size = ${newSet.size}")
+    newSet.update(elem3, true)
+    assert(newSet.size == 3, s"new set was not the expected size (size != 3): size = ${newSet.size}")
+    newSet.update(elem3, false)
+    assert(newSet.size == 2, s"new set was not the expected size (after, size != 2): size = ${newSet.size}")
   }
 
 }

@@ -16,7 +16,7 @@ import org.contakt.data.scala.collection.mutable.{UnorderedSequentialHashSet, Gr
 
 /**
  * Sesame implementation of an RDF triple store as
- * a mutable set of statements (triples).
+ * a triple set of statements (triples).
  * This class is abstract as some configuration methods
  * (from SesameTripleSetConfiguration) need to be able
  * to be mixed-in via traits to suit different user choices.
@@ -49,7 +49,7 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
   def -(elem: org.openrdf.model.Statement): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
   def -(elem1: org.openrdf.model.Statement,elem2: org.openrdf.model.Statement,elems: org.openrdf.model.Statement*): org.contakt.data.scala.collection.mutable.UnorderedSequentialSet[org.openrdf.model.Statement] = ???
 
-	/** Removes two or more elements from this mutable set. */
+	/** Removes two or more elements from this triple set. */
   def -=(stmt1: Statement, stmt2: Statement, stmts: Statement*) = {
   	defaultConnection.remove(stmt1)
   	defaultConnection.remove(stmt2)
@@ -72,7 +72,7 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 		this
 	}
   
-	/** adds two or more elements to this mutable set. */
+	/** adds two or more elements to this triple set. */
 	def +=(stmt1: Statement, stmt2: Statement, stmts: Statement*) = {
   	defaultConnection.add(stmt1)
   	defaultConnection.add(stmt2)
@@ -81,7 +81,7 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 	}
 
 	/**
-	 * Adds an element to this mutable set.
+	 * Adds an element to this triple set.
 	 *
 	 * @param stmt the triple to be added
 	 * @return true if the element was not yet present in the set, false otherwise.
@@ -111,7 +111,7 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 	def collectFirst[B](pf: PartialFunction[org.openrdf.model.Statement,B]): Option[B] = ???
 	def copyToBuffer[B >: org.openrdf.model.Statement](dest: scala.collection.mutable.Buffer[B]): Unit = ???
 
-	/** Counts the number of elements in the mutable set which satisfy a predicate. */
+	/** Counts the number of elements in the triple set which satisfy a predicate. */
 	def count(p: Statement => Boolean) = iterator.count(p)
 
   /**
@@ -169,7 +169,7 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 		resultSet
 	}
 
-	/** Finds an element of the mutable set satisfying a predicate, if any. */
+	/** Finds an element of the triple set satisfying a predicate, if any. */
 	def find(p: Statement => Boolean) = iterator.find(p)
 
 	def fold[A1 >: org.openrdf.model.Statement](z: A1)(op: (A1, A1) => A1): A1 = ???
@@ -182,7 +182,7 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 	/** [use case] Applies a function f to all elements of this triple set. */
 	def foreach[B](f: Statement => B) = iterator.foreach(f)
 
-	/** Partitions elements in fixed size mutable sets. */
+	/** Partitions elements in fixed size triple sets. */
 	def grouped(size: Int) = new GroupIterator[Statement](iterator, size, { () => empty })
 
 	/** Tests whether this triple set is known to have a finite size. */
@@ -252,17 +252,44 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
   /** Returns an Iterator over the elements in this triple set. */
 	def toIterator: Iterator[Statement] = iterator
 
-	def toList: List[org.openrdf.model.Statement] = ???
-	def toSeq: Seq[org.openrdf.model.Statement] = ???
-	def toSet[B >: org.openrdf.model.Statement]: scala.collection.immutable.Set[B] = ???
-	def toStream: scala.collection.immutable.Stream[org.openrdf.model.Statement] = ???
+	/** Converts this triple set to a list. */
+	def toList: List[Statement] = iterator.toList
+
+	/** Converts this triple set to a sequence. */
+	def toSeq: Seq[Statement] = iterator.toSeq
+
+	/** Converts this triple set to an imtriple set. */
+	def toSet[B >: Statement] = iterator.toSet[B]
+
+	/** Converts this triple set to an immutable stream. */
+	def toStream = iterator.toStream
 
   /** Creates a multi-line String representation of this triple set. */
   override def toString = mkString(stringPrefix + "{\n", ",\n", "}")
 
-  def toTraversable: Traversable[org.openrdf.model.Statement] = ???
-	def toVector: Vector[org.openrdf.model.Statement] = ???
-	def update(elem: org.openrdf.model.Statement,included: Boolean): Unit = ???
+	/** Converts this triple set to an unspecified Traversable. */
+  def toTraversable = iterator.toTraversable
+
+	/** Converts this triple set to a Vector. */
+	def toVector = iterator.toVector
+
+	/**
+	 * Updates the presence of a single element in this set.
+	 *
+	 * This method allows one to add or remove an element elem from this set depending on the value of parameter included. Typically, one would use the following syntax:
+	 *   set(elem) = true  // adds element
+	 *   set(elem) = false // removes element
+	 *
+	 * @param elem the element to be added or removed
+	 * @param included a flag indicating whether element should be included or excluded.
+	 */
+	def update(stmt: Statement,included: Boolean) {
+		if (included) {
+			defaultConnection.add(stmt)
+		} else {
+			defaultConnection.remove(stmt)
+		}
+	}
 
 	// **** Other methods ****
 	private def contexts = SesameTripleSet.contexts(defaultConnection)
@@ -270,7 +297,7 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
   /** The size of this triple set. */
   override def longSize = defaultConnection.size(contexts:_*)
 
-  /** [use case] Builds a new collection by applying a function to all elements of this mutable set. */
+  /** [use case] Builds a new collection by applying a function to all elements of this triple set. */
   def mapToSet[B](f: (Statement) => B) = map(f)
 
   def sparqlAsk(query: String) = SesameTripleSet.sparqlAsk(query)(defaultConnection)

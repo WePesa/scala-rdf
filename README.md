@@ -17,7 +17,8 @@ depending on the type and size of triple store being queried.
 Implementation
 --------------
 
-The initial implementation of this code is for Sesame (http://www.openrdf.org/).
+The initial implementation of this code is for Sesame ([http://www.openrdf.org/](http://www.openrdf.org/)).
 It proved too difficult to implement Scala's mutable 'Set' trait directly, due to the complexity of the dependencies
-among the Scala collection classes.  Instead, a trait with a subset of the 'Set' methods, 'UnorderedSequentialSet',
-is being implemented initially.
+among the Scala collection classes.  Instead, a trait with a subset of the 'Set' methods,
+['UnorderedSequentialSet'](src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala),
+has been implemented initially.

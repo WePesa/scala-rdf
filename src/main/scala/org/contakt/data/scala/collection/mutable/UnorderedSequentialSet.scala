@@ -420,7 +420,7 @@ import scala.reflect.ClassTag
   
 	/** [use case] Converts this mutable set to an array. */
 	def  toArray[B >: A](implicit arg0: ClassTag[B]): Array[B]
-	   
+
 	/** Converts this mutable set to a mutable buffer. */
 	def toBuffer[A1 >: A]: Buffer[A1] 
   
@@ -428,7 +428,7 @@ import scala.reflect.ClassTag
 	def toIndexedSeq: immutable.IndexedSeq[A] 
   
 	/** Converts this mutable set to an iterable collection. */
-	def toIterable: collection.Iterable[A] 
+	def toIterable: Iterable[A] 
   
 	/** Returns an Iterator over the elements in this mutable set. */
 	def toIterator: Iterator[A] 
@@ -442,12 +442,12 @@ import scala.reflect.ClassTag
 	// def toParArray: ParArray[A] 
   
 	/** Converts this mutable set to a sequence. */
-	def toSeq: collection.Seq[A] 
+	def toSeq: Seq[A] 
   
-	/** Converts this mutable set to a set. */
+	/** Converts this mutable set to an immutable set. */
 	def toSet[B >: A]: immutable.Set[B] 
   
-	/** Converts this mutable set to a stream. */
+	/** Converts this mutable set to an immutable stream. */
 	def toStream: immutable.Stream[A] 
   
 	/** Creates a String representation of this object. */
@@ -471,7 +471,16 @@ import scala.reflect.ClassTag
 	/** Converts this mutable set of triples into three collections of the first, second, and third element of each triple. */
 	// def unzip3[A1, A2, A3](implicit asTriple: (A) => (A1, A2, A3)): (Set[A1], Set[A2], Set[A3]) 
 
-	/** Updates the presence of a single element in this set. */
+	/**
+	 * Updates the presence of a single element in this set.
+	 *
+	 * This method allows one to add or remove an element elem from this set depending on the value of parameter included. Typically, one would use the following syntax:
+	 *   set(elem) = true  // adds element
+	 *   set(elem) = false // removes element
+	 *
+	 * @param elem the element to be added or removed
+	 * @param included a flag indicating whether element should be included or excluded.
+	 */
 	def update(elem: A, included: Boolean): Unit 
   
 	/** Creates a non-strict view of a slice of this mutable set. */
