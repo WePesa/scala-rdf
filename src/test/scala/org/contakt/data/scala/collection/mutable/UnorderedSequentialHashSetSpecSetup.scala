@@ -14,6 +14,6 @@ trait UnorderedSequentialHashSetSpecSetup[T] extends UnorderedSequentialSetSpecS
 	 *
 	 * @return an empty set.
 	 */
-	def empty = HashSet[T]()
+	def emptySet = HashSet[T]()
 
 }

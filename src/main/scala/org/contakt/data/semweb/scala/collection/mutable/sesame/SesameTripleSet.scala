@@ -1,13 +1,11 @@
 package org.contakt.data.semweb.scala.collection.mutable.sesame
 
-import scala.collection.Set
 import scala.collection.immutable
-import scala.collection.mutable.Buffer
 import scala.collection.JavaConversions._
 import scala.reflect.ClassTag
 import scala.util.Try
-import org.openrdf.model.{Resource, Statement}
-import org.openrdf.query.{BindingSet, QueryLanguage}
+import org.openrdf.model.Statement
+import org.openrdf.query.QueryLanguage
 import org.openrdf.repository.{Repository, RepositoryConnection}
 import org.openrdf.repository.sail.SailRepository
 import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer
@@ -95,8 +93,7 @@ class SesameTripleSet(val rep: Repository) extends UnorderedSequentialSet[Statem
 		}
 	}
 
-	def aggregate[B](z: B)(seqop: (B, org.openrdf.model.Statement) => B,combop: (B, B) => B): B = ???
-	// def apply(elem: org.openrdf.model.Statement): Boolean = ???
+  def aggregate[B](z: => B)(seqop: (B, Statement) => B, combop: (B, B) => B): B  = ???
 
 	/**
 	 * Removes all elements that can be removed from the triple set.

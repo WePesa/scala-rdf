@@ -25,7 +25,7 @@ trait UnorderedSequentialSetSpecSetup[T, TSet <: UnorderedSequentialSet[T]] {
 	 *
 	 * @return an empty set.
 	 */
-	def empty: TSet
+	def emptySet: TSet
 
   /** Returns a new element of type T. */
   def newElem1: T

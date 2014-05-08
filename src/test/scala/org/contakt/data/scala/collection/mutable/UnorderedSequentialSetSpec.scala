@@ -4,8 +4,6 @@ import scala.collection.mutable.{Buffer,HashSet}
 import scala.collection.immutable
 import scala.reflect.ClassTag
 import org.scalatest._
-import org.scalatest.matchers._
-import org.openrdf.model.impl.StatementImpl
 
 /**
  * Abstract base class for testing implementations of
@@ -13,7 +11,7 @@ import org.openrdf.model.impl.StatementImpl
  * 'T' is the element type of the Traversable implementation,
  * and 'TSet' is the class implementing 'UnorderedSequentialSet[T]' that should be used.
  */
-abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequentialSet[T]] extends FlatSpec with BeforeAndAfter with ShouldMatchers with UnorderedSequentialSetSpecSetup[T, TSet] {
+abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequentialSet[T]] extends FlatSpec with BeforeAndAfter with Matchers with UnorderedSequentialSetSpecSetup[T, TSet] {
 
   before {
     beforeSetup()
@@ -24,18 +22,18 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   "An unordered sequential set" should "have a concrete type for an empty set" in {
-    info(empty.getClass.getName)
+    info(emptySet.getClass.getName)
   }
 
   it should "be empty if created empty" in {
-    val emptySet = empty
-    assert(emptySet.size == 0, "empty set was not empty as expected (size != 0)")
-    assert(emptySet.isEmpty, "empty set was not empty as expected (!isEmpty)")
-    assert(!emptySet.iterator.hasNext, "empty set was not empty as expected (iterator has next)")
+    val newSet = emptySet
+    assert(newSet.size == 0, "empty set was not empty as expected (size != 0)")
+    assert(newSet.isEmpty, "empty set was not empty as expected (!isEmpty)")
+    assert(!newSet.iterator.hasNext, "empty set was not empty as expected (iterator has next)")
   }
 
   it should "allow adding an element to an empty set" in {
-    val newSet = empty
+    val newSet = emptySet
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0): size = ${newSet.size}")
     assert(newSet.isEmpty, "new set was not empty as expected (!isEmpty)")
     newSet += newElem1
@@ -47,11 +45,11 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
-    val newSet = empty
+    val newSet = emptySet
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0): size = ${newSet.size}")
     newSet += (elem1, elem2)
     assert(newSet.size == 2, s"new set did not contain 2 elements as expected (size != 2): size = ${newSet.size}")
-    val newSet2 = empty
+    val newSet2 = emptySet
     assert(newSet2.size == 0, s"new set (2) was not empty as expected (size != 0): size = ${newSet2.size}")
     newSet2 += (elem1, elem2, elem3)
     assert(newSet2.size == 3, s"new set (3) did not contain 3 elements as expected (size != 3): size = ${newSet2.size}")
@@ -61,15 +59,15 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
-    val newSet = empty
-    val newSet2 = empty
+    val newSet = emptySet
+    val newSet2 = emptySet
     newSet += elem1
     assert(newSet.size == 1, s"new set had unexpected size (size != 1): size = ${newSet.size}")
     newSet2 += (elem2, elem3)
     assert(newSet2.size == 2, s"new set 2 had unexpected size (size != 2): size = ${newSet2.size}")
     newSet ++= newSet2
     assert(newSet.size == 3, s"new set had unexpected size (size != 3): size = ${newSet.size}")
-    val newSet3 = empty
+    val newSet3 = emptySet
     newSet3 += elem1
     assert(newSet3.size == 1, s"new set 3 had unexpected size (size != 1): size = ${newSet.size}")
     newSet3 ++= newSet2.iterator
@@ -77,7 +75,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "contain an element that was already added to it" in {
-    val newSet = empty
+    val newSet = emptySet
     newSet += newElem1
     assert(newSet.contains(newElem1), s"new set did not contain the element added to it (#1), as expected")
     newSet += newElem2
@@ -86,20 +84,20 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
 
   it should "not allow adding the same element twice to it" in {
     val elem = newElem1
-    val newSet = empty
+    val newSet = emptySet
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0): size = ${newSet.size}")
     newSet += elem
     assert(newSet.size == 1, s"new set did not contain 1 element as expected (size != 1 after 1st attempt): size = ${newSet.size}")
     newSet += elem
     assert(newSet.size == 1, s"new set did not contain 1 element as expected (size != 1 after 2nd attempt): size = ${newSet.size}")
-    val newSet2 = empty
+    val newSet2 = emptySet
     assert(newSet2.size == 0, s"new set 2 was not empty as expected (size != 0): size = ${newSet2.size}")
     assert(newSet2.add(elem) && (newSet2.size == 1), s"new set 2 did not contain 1 element as expected (add failed or size != 1): size = ${newSet2.size}")
     assert(!newSet2.add(elem) && (newSet2.size == 1), s"new set 2 did not contain 1 element as expected (add succeeded or size != 1: size = ${newSet2.size}")
   }
 
   it should "allow removing the only element from it" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem = newElem1
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 before starting): size = ${newSet.size}")
     newSet += elem
@@ -112,13 +110,13 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
-    val newSet = empty
+    val newSet = emptySet
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 before starting): size = ${newSet.size}")
     newSet += (elem1, elem2)
     assert(newSet.size == 2, s"new set did not contain 2 elements as expected: size = ${newSet.size}")
     newSet -= (elem1, elem2)
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 after finishing): size = ${newSet.size}")
-    val newSet2 = empty
+    val newSet2 = emptySet
     assert(newSet2.size == 0, s"new set 2 was not empty as expected (size != 0 before starting): size = ${newSet2.size}")
     newSet2 += (elem1, elem2, elem3)
     assert(newSet2.size == 3, s"new set 2 did not contain 3 elements as expected: size = ${newSet2.size}")
@@ -127,7 +125,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "ignore it if you try to remove a element when it is empty" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem = newElem1
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 before starting): size = ${newSet.size}")
     newSet -= elem
@@ -137,7 +135,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "ignore it if you try to remove a element that is not in it" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 before starting): size = ${newSet.size}")
@@ -154,7 +152,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   it should "allow clearing the elements" in {
     val elem1 = newElem1
     val elem2 = newElem2
-    val newSet = empty
+    val newSet = emptySet
     assert(newSet.size == 0, s"new set was not empty as expected (size != 0 before starting): size = ${newSet.size}")
     newSet += (elem1, elem2)
     assert(newSet.size == 2, s"new set did not contain 2 elements as expected (size != 2): size = ${newSet.size}")
@@ -164,7 +162,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
 
   it should "allow iterating through all of the elements" in {
     val controlSet = new HashSet[T]()
-    val newSet = empty
+    val newSet = emptySet
     newSet += newElem1
     newSet += newElem2
     assert(newSet.size == 2, s"new set did not have the number of elements expected (size != 2 after adding elements): size = ${newSet.size}")
@@ -174,7 +172,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "have an 'apply' method that does a 'contains' check" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     newSet += elem1
@@ -183,7 +181,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "allow counting of elements based on a filter function" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -195,7 +193,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "allow testing for matching elements based on a filter function" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -207,7 +205,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "allow returning a subset based on matching a filter function" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -219,7 +217,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "allow returning a subset based on not matching a filter function" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -231,7 +229,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "allow find an element that matches a filter function, if any" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -249,7 +247,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "allow testing whether all elements match a filter function" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -259,7 +257,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "allow iterating over all elements and applying a function" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -267,7 +265,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
     var count = 0
     newSet.foreach{elem => count += 1}
     assert(count == 2, s"count different to expected (count != 2): count = $count")
-    val newSet2 = empty
+    val newSet2 = emptySet
     newSet2 += (elem1, elem2, elem3)
     count = 0
     newSet2.foreach{elem => count += 1}
@@ -275,7 +273,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be able to iterate over elements and return them in fixed size groups" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -307,7 +305,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to create a string with all of the elements" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -326,7 +324,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to partition the elements of a set based on a predicate" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -338,7 +336,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be able to remove all elements that don't match a predicate" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -349,7 +347,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to create an array of the elements" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -359,7 +357,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to create a buffer of the elements" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -369,7 +367,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to create an indexed sequence of the elements" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -379,7 +377,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to create an iterable or iterator for the elements" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -395,7 +393,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to create a list of the elements" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -405,7 +403,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to create a sequence of the elements" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -415,7 +413,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to create an immutable set of the elements" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -425,7 +423,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to create an immutable stream of the elements" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -435,7 +433,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to traverse the elements" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -447,7 +445,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to create a vector of the elements" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3
@@ -457,7 +455,7 @@ abstract class UnorderedSequentialSetSpec[T: ClassTag, TSet <: UnorderedSequenti
   }
 
   it should "be possible to add or remove an element based on a boolean value" in {
-    val newSet = empty
+    val newSet = emptySet
     val elem1 = newElem1
     val elem2 = newElem2
     val elem3 = newElem3

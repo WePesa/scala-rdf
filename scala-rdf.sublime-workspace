@@ -107,6 +107,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/build.sbt",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSetSpec.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/SesameTripleSet.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/UnorderedSequentialSet.scala",
@@ -142,7 +143,6 @@
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/semweb/scala/collection/mutable/sesame/package.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/main/scala/org/contakt/data/scala/collection/mutable/SetSubset.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/HashSetSpec.scala",
-		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/build.sbt",
 		"/C/Users/Tony/SkyDrive/Documents/Licences/sublime-text.lic.txt",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SetSubset.scala",
 		"/C/Users/Tony/SkyDrive/Projects/scala-rdf/src/test/scala/org/contakt/data/scala/collection/mutable/SetSpecSetup.scala",

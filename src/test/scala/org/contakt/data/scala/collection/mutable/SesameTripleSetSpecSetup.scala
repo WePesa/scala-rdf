@@ -20,6 +20,6 @@ trait SesameTripleSetSpecSetup extends UnorderedSequentialSetSpecSetup[Statement
    *
    * @return an empty set.
    */
-  def empty = SesameTripleSet.empty
+  def emptySet = SesameTripleSet.empty
 
 }

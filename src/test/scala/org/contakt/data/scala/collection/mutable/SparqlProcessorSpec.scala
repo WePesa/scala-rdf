@@ -1,17 +1,14 @@
 package org.contakt.data.scala.collection.mutable
 
-import scala.collection.mutable.HashSet
 import scala.util.{Failure, Success, Try}
 import org.scalatest._
-import org.scalatest.matchers._
-import org.openrdf.model.impl.StatementImpl
 import org.contakt.data.semweb.scala.collection.mutable.sesame.SparqlProcessor
 
 /**
  * Class for testing implementations of
  * the 'SparqlProcessor' trait.
  */
-trait SparqlProcessorSpec[Proc <: SparqlProcessor] extends FlatSpec with BeforeAndAfter with ShouldMatchers with SparqlProcessorSpecSetup[Proc] {
+trait SparqlProcessorSpec[Proc <: SparqlProcessor] extends FlatSpec with BeforeAndAfter with Matchers with SparqlProcessorSpecSetup[Proc] {
 
   /**
    * Class used to add extra methods to 'Proc' objects under test.
@@ -34,11 +31,11 @@ trait SparqlProcessorSpec[Proc <: SparqlProcessor] extends FlatSpec with BeforeA
   // **** Tests ****
 
   "A SPARQL processor" should "have a concrete type for an empty set" in {
-    info(empty.getClass.getName)
+    info(emptyProc.getClass.getName)
   }
 
   it should "be empty if created empty" in {
-    val emptySet = empty
+    val emptySet = emptyProc
     emptySet.longSize match {
       case Failure(e) => assert(false, s"failed counting statements in a processor: ${e.getMessage}")
       case Success(size) => assert(size == 0, s"found unexpected statements in an empty processor: count = $size")
@@ -46,7 +43,7 @@ trait SparqlProcessorSpec[Proc <: SparqlProcessor] extends FlatSpec with BeforeA
   }
 
   it should "allow insertion of a statement" in {
-    val newSet = empty
+    val newSet = emptyProc
     newSet.sparqlUpdate("INSERT { <http://example.com#subject> <http://example.com#predicate> <http://example.com#object> . } WHERE {}") match {
       case Failure(e) => assert(false, s"failed inserting statement into an empty processor: ${e.getMessage}")
       case Success(nothing) => // ignore
@@ -58,7 +55,7 @@ trait SparqlProcessorSpec[Proc <: SparqlProcessor] extends FlatSpec with BeforeA
   }
 
   it should "allow deletion of a statement" in {
-    val newSet = empty
+    val newSet = emptyProc
     newSet.sparqlUpdate("INSERT { <http://example.com#subject> <http://example.com#predicate> <http://example.com#object> . } WHERE {}") match {
       case Failure(e) => assert(false, s"failed inserting statement into an empty processor: ${e.getMessage}")
       case Success(nothing) => // ignore
@@ -78,7 +75,7 @@ trait SparqlProcessorSpec[Proc <: SparqlProcessor] extends FlatSpec with BeforeA
   }
 
   it should "allow selection of a statement" in {
-    val newSet = empty
+    val newSet = emptyProc
     newSet.sparqlUpdate("INSERT { <http://example.com#subject> <http://example.com#predicate> <http://example.com#object> . } WHERE {}") match {
       case Failure(e) => assert(false, s"failed inserting statement into an empty processor: ${e.getMessage}")
       case Success(nothing) => // ignore
@@ -96,7 +93,7 @@ trait SparqlProcessorSpec[Proc <: SparqlProcessor] extends FlatSpec with BeforeA
   }
 
   it should "only allow selection of actual statements" in {
-    val newSet = empty
+    val newSet = emptyProc
     newSet.sparqlUpdate("INSERT { <http://example.com#subject> <http://example.com#predicate> <http://example.com#object> . } WHERE {}") match {
       case Failure(e) => assert(false, s"failed inserting statement into an empty processor: ${e.getMessage}")
       case Success(nothing) => // ignore
@@ -114,7 +111,7 @@ trait SparqlProcessorSpec[Proc <: SparqlProcessor] extends FlatSpec with BeforeA
   }
 
   it should "allow 'ASK' queries" in {
-    val newSet = empty
+    val newSet = emptyProc
     newSet.sparqlUpdate("INSERT { <http://example.com#subject> <http://example.com#predicate> <http://example.com#object> . } WHERE {}") match {
       case Failure(e) => assert(false, s"failed inserting statement into an empty processor: ${e.getMessage}")
       case Success(nothing) => // ignore
@@ -134,7 +131,7 @@ trait SparqlProcessorSpec[Proc <: SparqlProcessor] extends FlatSpec with BeforeA
   }
 
   it should "allow 'DESCRIBE' queries" in {
-    val newSet = empty
+    val newSet = emptyProc
     newSet.sparqlUpdate("INSERT { <http://example.com#subject> <http://example.com#predicate> <http://example.com#object> . } WHERE {}") match {
       case Failure(e) => assert(false, s"failed inserting statement into an empty processor: ${e.getMessage}")
       case Success(nothing) => // ignore

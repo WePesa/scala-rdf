@@ -116,9 +116,9 @@ import scala.reflect.ClassTag
   }
   
 	/** Aggregates the results of applying an operator to subsequent elements. */
-	def aggregate[B](z: B)(seqop: (B, A) => B, combop: (B, B) => B): B 
-  
-	/** Composes two instances of Function1 in a new Function1, with this function applied first. */
+  def aggregate[B](z: => B)(seqop: (B, A) => B, combop: (B, B) => B): B
+
+  /** Composes two instances of Function1 in a new Function1, with this function applied first. */
 	// def andThen[A](g: (Boolean) => A): (A) => A 
   
 	/** Tests if some element is contained in this set. */

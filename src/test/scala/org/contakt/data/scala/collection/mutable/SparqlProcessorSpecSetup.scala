@@ -1,6 +1,6 @@
 package org.contakt.data.scala.collection.mutable
 
-import org.contakt.data.semweb.scala.collection.mutable.sesame.SparqlProcessor
+import org.contakt.data.semweb.scala.collection.mutable.sesame.{SparqlProcessor, SesameTripleSet}
 
 /**
  * Trait for implementation specific setup of 'SparqlProcessor' types,
@@ -14,6 +14,6 @@ trait SparqlProcessorSpecSetup[Proc <: SparqlProcessor] {
 	 *
 	 * @return an empty SPARQL processor.
 	 */
-	def empty: Proc
+	def emptyProc: Proc = SesameTripleSet.empty.asInstanceOf[Proc]
 
 }
